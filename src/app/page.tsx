@@ -19,10 +19,6 @@ export default function Home() {
           defaultDuration={30}
         />
 
-        {/* Powered by Lova */}
-        <p className="mt-7 text-[13px] text-navy-20">
-          Powered by <span className="font-heading font-bold text-navy-60">Lova</span>
-        </p>
       </div>
     </>
   );

@@ -192,6 +192,11 @@ function WidgetShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="overflow-hidden rounded-[22px] border border-navy-10/60 bg-white shadow-[0_1px_3px_rgba(26,26,49,0.06),0_8px_32px_rgba(26,26,49,0.05)]">
       {children}
+      <div className="border-t border-navy-5/50 bg-navy-2/30 px-7 py-3">
+        <p className="text-center text-[12px] text-navy-20">
+          Powered by <span className="font-semibold text-navy-40">Lova</span>
+        </p>
+      </div>
     </div>
   );
 }
