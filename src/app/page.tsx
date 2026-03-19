@@ -20,12 +20,9 @@ export default function Home() {
         />
 
         {/* Powered by Lova */}
-        <div className="mt-8 flex items-center gap-2 text-[10.5px] text-navy-20">
-          <div className="h-px w-5 bg-navy-10/60" />
-          <span className="tracking-widest uppercase">Powered by</span>
-          <span className="font-heading font-bold tracking-wide text-navy-40">Lova</span>
-          <div className="h-px w-5 bg-navy-10/60" />
-        </div>
+        <p className="mt-7 text-[11px] text-navy-20">
+          Powered by <span className="font-semibold text-navy-40">Lova</span>
+        </p>
       </div>
     </>
   );
