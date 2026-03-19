@@ -29,7 +29,7 @@ export function Confirmation({ name, email, date, time, duration, organizerName,
       </div>
 
       <p className="text-[12px] font-semibold tracking-widest text-radical uppercase">Confirmed</p>
-      <h3 className="mt-1 font-heading text-[20px] font-bold tracking-[-0.01em] text-navy">Meeting scheduled</h3>
+      <h3 className="mt-1 text-[18px] font-semibold tracking-[-0.01em] text-navy">Meeting scheduled</h3>
       <p className="mt-2.5 max-w-[260px] text-[13px] leading-relaxed text-navy-40">
         A calendar invitation has been sent to <span className="font-medium text-navy">{email}</span>
       </p>

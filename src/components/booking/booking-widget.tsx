@@ -103,7 +103,7 @@ export function BookingWidget({
                     {organizer.avatar ? (
                       <img src={organizer.avatar} alt={organizer.name} className="h-full w-full rounded-xl object-cover" />
                     ) : (
-                      <span className="font-heading text-[15px] font-bold text-white">
+                      <span className="text-[15px] font-bold text-white">
                         {organizer.name.split(" ").map((n) => n[0]).join("")}
                       </span>
                     )}
@@ -116,7 +116,7 @@ export function BookingWidget({
                   <p className="text-[12.5px] font-medium text-navy-40">
                     {organizer.name}{organizer.company && <span className="text-navy-20"> · {organizer.company}</span>}
                   </p>
-                  <h1 className="font-heading text-[19px] font-extrabold leading-[1.25] tracking-[-0.01em] text-navy">
+                  <h1 className="text-[18px] font-semibold leading-[1.3] text-navy">
                     {meetingTitle}
                   </h1>
                 </div>
@@ -190,13 +190,13 @@ export function BookingWidget({
 
 function WidgetShell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="overflow-hidden rounded-[22px] border border-navy-10/60 bg-white shadow-[0_1px_3px_rgba(26,26,49,0.06),0_8px_32px_rgba(26,26,49,0.05)]">
-      {children}
-      <div className="border-t border-navy-5/50 bg-navy-2/30 px-7 py-3">
-        <p className="text-center text-[12px] text-navy-20">
-          Powered by <span className="font-semibold text-navy-40">Lova</span>
-        </p>
+    <div className="flex flex-col items-center gap-4">
+      <div className="w-full overflow-hidden rounded-[20px] border border-navy-10/50 bg-white shadow-[0_1px_3px_rgba(26,26,49,0.05),0_8px_24px_rgba(26,26,49,0.04)]">
+        {children}
       </div>
+      <p className="text-[11.5px] text-navy-20">
+        Powered by <span className="font-medium text-navy-40">Lova</span>
+      </p>
     </div>
   );
 }

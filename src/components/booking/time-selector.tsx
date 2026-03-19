@@ -41,7 +41,7 @@ export function TimeSelector({ date, duration, onSelect }: TimeSelectorProps) {
 
   return (
     <div>
-      <p className="mb-4 font-heading text-[15px] font-bold text-navy">
+      <p className="mb-4 text-[14px] font-semibold text-navy">
         {date.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" })}
       </p>
 

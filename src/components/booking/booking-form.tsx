@@ -45,7 +45,7 @@ export function BookingForm({ onSubmit, onBack }: BookingFormProps) {
         <ArrowLeft className="h-3.5 w-3.5 transition-transform group-hover:-translate-x-0.5" /> Back
       </button>
 
-      <h3 className="mb-6 font-heading text-[19px] font-bold text-navy">Your details</h3>
+      <h3 className="mb-6 text-[17px] font-semibold text-navy">Your details</h3>
 
       <div className="space-y-4">
         <div className="grid grid-cols-2 gap-3">

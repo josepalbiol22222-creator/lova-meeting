@@ -57,7 +57,7 @@ export function DateSelector({ selected, onSelect }: DateSelectorProps) {
     <div>
       <div className="mb-4 flex items-center justify-between">
         <div>
-          <h3 className="font-heading text-[18px] font-bold tracking-[-0.01em] text-navy">{MONTHS[viewMonth]}</h3>
+          <h3 className="text-[17px] font-semibold tracking-[-0.01em] text-navy">{MONTHS[viewMonth]}</h3>
           <p className="text-[11px] font-medium text-navy-20">{viewYear}</p>
         </div>
         <div className="flex gap-0.5">
