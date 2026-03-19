@@ -154,8 +154,17 @@ export function BookingWidget({
                 </div>
               )}
 
+              {/* Factorial animated logo */}
+              <div className="mt-5">
+                <img
+                  src="https://4960096.fs1.hubspotusercontent-eu1.net/hubfs/4960096/LOGO-RESOLVE-A-IN.gif"
+                  alt="Factorial"
+                  className="h-7 opacity-40"
+                />
+              </div>
+
               {/* Language switcher */}
-              <div className="mt-4">
+              <div className="mt-3">
                 <LanguageSwitcher />
               </div>
 
@@ -217,17 +226,9 @@ function WidgetShell({ children }: { children: React.ReactNode }) {
       <div className="w-full overflow-hidden rounded-[20px] border border-navy-10/50 bg-white shadow-[0_1px_3px_rgba(26,26,49,0.05),0_8px_24px_rgba(26,26,49,0.04)]">
         {children}
       </div>
-      <div className="flex items-center gap-3">
-        <img
-          src="https://4960096.fs1.hubspotusercontent-eu1.net/hubfs/4960096/LOGO-RESOLVE-A-IN.gif"
-          alt="Factorial"
-          className="h-6 opacity-50"
-        />
-        <span className="text-navy-10">|</span>
-        <p className="text-[11.5px] text-navy-20">
-          Powered by <span className="font-medium text-navy-40">Lova</span>
-        </p>
-      </div>
+      <p className="text-[11.5px] text-navy-20">
+        Powered by <span className="font-medium text-navy-40">Lova</span>
+      </p>
     </div>
   );
 }

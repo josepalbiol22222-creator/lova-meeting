@@ -21,7 +21,6 @@ export function LanguageSwitcher() {
   }, []);
 
   function switchLocale(newLocale: Locale) {
-    // Replace the locale prefix in the current path
     const segments = pathname.split("/");
     segments[1] = newLocale;
     window.location.href = segments.join("/");
@@ -31,14 +30,14 @@ export function LanguageSwitcher() {
     <div ref={ref} className="relative">
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-1.5 rounded-full border border-navy-10/60 bg-white/80 px-3 py-1.5 text-[11.5px] font-medium text-navy-60 shadow-sm backdrop-blur-sm transition-all hover:border-radical/20 hover:text-radical hover:shadow-md"
+        className="flex items-center gap-1.5 rounded-full border border-navy-10/60 bg-white/80 px-3 py-1.5 text-[11.5px] font-medium text-navy-60 shadow-sm transition-all hover:border-radical/20 hover:text-radical hover:shadow-md"
       >
         <Globe className="h-3 w-3" />
         {localeNames[locale]}
       </button>
 
       {open && (
-        <div className="absolute right-0 top-full z-50 mt-1.5 min-w-[140px] animate-fade-up overflow-hidden rounded-xl border border-navy-10/60 bg-white shadow-lg">
+        <div className="absolute bottom-full left-0 z-50 mb-1.5 min-w-[140px] animate-fade-up overflow-hidden rounded-xl border border-navy-10/60 bg-white shadow-lg">
           {locales.map((l) => (
             <button
               key={l}
