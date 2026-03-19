@@ -1,0 +1,495 @@
+[  380707ms] [ERROR] ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/components/landing/cta'
+  4 | import { Features } from "@/components/landing/features";
+  5 | import { HowItWorks } from "@/components/landing/how-it-works";
+> 6 | import { CTA } from "@/components/landing/cta";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import { Footer } from "@/components/landing/footer";
+  8 |
+  9 | export default function Home() {
+
+Import map: aliased to relative './src/components/landing/cta' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:3272
+[  380707ms] [ERROR] ./src/app/page.tsx:4:1
+Module not found: Can't resolve '@/components/landing/features'
+  2 | import { Navbar } from "@/components/landing/navbar";
+  3 | import { Hero } from "@/components/landing/hero";
+> 4 | import { Features } from "@/components/landing/features";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import { HowItWorks } from "@/components/landing/how-it-works";
+  6 | import { CTA } from "@/components/landing/cta";
+  7 | import { Footer } from "@/components/landing/footer";
+
+Import map: aliased to relative './src/components/landing/features' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:3272
+[  380708ms] [ERROR] ./src/app/page.tsx:7:1
+Module not found: Can't resolve '@/components/landing/footer'
+   5 | import { HowItWorks } from "@/components/landing/how-it-works";
+   6 | import { CTA } from "@/components/landing/cta";
+>  7 | import { Footer } from "@/components/landing/footer";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 |
+   9 | export default function Home() {
+  10 |   return (
+
+Import map: aliased to relative './src/components/landing/footer' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:3272
+[  380708ms] [ERROR] ./src/app/page.tsx:3:1
+Module not found: Can't resolve '@/components/landing/hero'
+  1 | import { BackgroundOrbs } from "@/components/ui/background-orbs";
+  2 | import { Navbar } from "@/components/landing/navbar";
+> 3 | import { Hero } from "@/components/landing/hero";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import { Features } from "@/components/landing/features";
+  5 | import { HowItWorks } from "@/components/landing/how-it-works";
+  6 | import { CTA } from "@/components/landing/cta";
+
+Import map: aliased to relative './src/components/landing/hero' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:3272
+[  380708ms] [ERROR] ./src/app/page.tsx:5:1
+Module not found: Can't resolve '@/components/landing/how-it-works'
+  3 | import { Hero } from "@/components/landing/hero";
+  4 | import { Features } from "@/components/landing/features";
+> 5 | import { HowItWorks } from "@/components/landing/how-it-works";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 | import { CTA } from "@/components/landing/cta";
+  7 | import { Footer } from "@/components/landing/footer";
+  8 |
+
+Import map: aliased to relative './src/components/landing/how-it-works' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:3272
+[  380708ms] [ERROR] ./src/app/page.tsx:2:1
+Module not found: Can't resolve '@/components/landing/navbar'
+  1 | import { BackgroundOrbs } from "@/components/ui/background-orbs";
+> 2 | import { Navbar } from "@/components/landing/navbar";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  3 | import { Hero } from "@/components/landing/hero";
+  4 | import { Features } from "@/components/landing/features";
+  5 | import { HowItWorks } from "@/components/landing/how-it-works";
+
+Import map: aliased to relative './src/components/landing/navbar' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:3272
+[  380708ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/demo?_rsc=14zt2:0
+[  381126ms] [ERROR] ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/components/landing/cta'
+  4 | import { Features } from "@/components/landing/features";
+  5 | import { HowItWorks } from "@/components/landing/how-it-works";
+> 6 | import { CTA } from "@/components/landing/cta";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import { Footer } from "@/components/landing/footer";
+  8 |
+  9 | export default function Home() {
+
+Import map: aliased to relative './src/components/landing/cta' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:3272
+[  381127ms] [ERROR] ./src/app/page.tsx:4:1
+Module not found: Can't resolve '@/components/landing/features'
+  2 | import { Navbar } from "@/components/landing/navbar";
+  3 | import { Hero } from "@/components/landing/hero";
+> 4 | import { Features } from "@/components/landing/features";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import { HowItWorks } from "@/components/landing/how-it-works";
+  6 | import { CTA } from "@/components/landing/cta";
+  7 | import { Footer } from "@/components/landing/footer";
+
+Import map: aliased to relative './src/components/landing/features' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:3272
+[  381127ms] [ERROR] ./src/app/page.tsx:7:1
+Module not found: Can't resolve '@/components/landing/footer'
+   5 | import { HowItWorks } from "@/components/landing/how-it-works";
+   6 | import { CTA } from "@/components/landing/cta";
+>  7 | import { Footer } from "@/components/landing/footer";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 |
+   9 | export default function Home() {
+  10 |   return (
+
+Import map: aliased to relative './src/components/landing/footer' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:3272
+[  381127ms] [ERROR] ./src/app/page.tsx:3:1
+Module not found: Can't resolve '@/components/landing/hero'
+  1 | import { BackgroundOrbs } from "@/components/ui/background-orbs";
+  2 | import { Navbar } from "@/components/landing/navbar";
+> 3 | import { Hero } from "@/components/landing/hero";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import { Features } from "@/components/landing/features";
+  5 | import { HowItWorks } from "@/components/landing/how-it-works";
+  6 | import { CTA } from "@/components/landing/cta";
+
+Import map: aliased to relative './src/components/landing/hero' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:3272
+[  381127ms] [ERROR] ./src/app/page.tsx:5:1
+Module not found: Can't resolve '@/components/landing/how-it-works'
+  3 | import { Hero } from "@/components/landing/hero";
+  4 | import { Features } from "@/components/landing/features";
+> 5 | import { HowItWorks } from "@/components/landing/how-it-works";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 | import { CTA } from "@/components/landing/cta";
+  7 | import { Footer } from "@/components/landing/footer";
+  8 |
+
+Import map: aliased to relative './src/components/landing/how-it-works' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:3272
+[  381128ms] [ERROR] ./src/app/page.tsx:2:1
+Module not found: Can't resolve '@/components/landing/navbar'
+  1 | import { BackgroundOrbs } from "@/components/ui/background-orbs";
+> 2 | import { Navbar } from "@/components/landing/navbar";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  3 | import { Hero } from "@/components/landing/hero";
+  4 | import { Features } from "@/components/landing/features";
+  5 | import { HowItWorks } from "@/components/landing/how-it-works";
+
+Import map: aliased to relative './src/components/landing/navbar' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:3272
+[  381134ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/demo?_rsc=14zt2:0
+[  381208ms] [ERROR] ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/components/landing/cta'
+  4 | import { Features } from "@/components/landing/features";
+  5 | import { HowItWorks } from "@/components/landing/how-it-works";
+> 6 | import { CTA } from "@/components/landing/cta";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import { Footer } from "@/components/landing/footer";
+  8 |
+  9 | export default function Home() {
+
+Import map: aliased to relative './src/components/landing/cta' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:3272
+[  381208ms] [ERROR] ./src/app/page.tsx:4:1
+Module not found: Can't resolve '@/components/landing/features'
+  2 | import { Navbar } from "@/components/landing/navbar";
+  3 | import { Hero } from "@/components/landing/hero";
+> 4 | import { Features } from "@/components/landing/features";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import { HowItWorks } from "@/components/landing/how-it-works";
+  6 | import { CTA } from "@/components/landing/cta";
+  7 | import { Footer } from "@/components/landing/footer";
+
+Import map: aliased to relative './src/components/landing/features' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:3272
+[  381208ms] [ERROR] ./src/app/page.tsx:7:1
+Module not found: Can't resolve '@/components/landing/footer'
+   5 | import { HowItWorks } from "@/components/landing/how-it-works";
+   6 | import { CTA } from "@/components/landing/cta";
+>  7 | import { Footer } from "@/components/landing/footer";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 |
+   9 | export default function Home() {
+  10 |   return (
+
+Import map: aliased to relative './src/components/landing/footer' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:3272
+[  381209ms] [ERROR] ./src/app/page.tsx:3:1
+Module not found: Can't resolve '@/components/landing/hero'
+  1 | import { BackgroundOrbs } from "@/components/ui/background-orbs";
+  2 | import { Navbar } from "@/components/landing/navbar";
+> 3 | import { Hero } from "@/components/landing/hero";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import { Features } from "@/components/landing/features";
+  5 | import { HowItWorks } from "@/components/landing/how-it-works";
+  6 | import { CTA } from "@/components/landing/cta";
+
+Import map: aliased to relative './src/components/landing/hero' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:3272
+[  381209ms] [ERROR] ./src/app/page.tsx:5:1
+Module not found: Can't resolve '@/components/landing/how-it-works'
+  3 | import { Hero } from "@/components/landing/hero";
+  4 | import { Features } from "@/components/landing/features";
+> 5 | import { HowItWorks } from "@/components/landing/how-it-works";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 | import { CTA } from "@/components/landing/cta";
+  7 | import { Footer } from "@/components/landing/footer";
+  8 |
+
+Import map: aliased to relative './src/components/landing/how-it-works' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:3272
+[  381209ms] [ERROR] ./src/app/page.tsx:2:1
+Module not found: Can't resolve '@/components/landing/navbar'
+  1 | import { BackgroundOrbs } from "@/components/ui/background-orbs";
+> 2 | import { Navbar } from "@/components/landing/navbar";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  3 | import { Hero } from "@/components/landing/hero";
+  4 | import { Features } from "@/components/landing/features";
+  5 | import { HowItWorks } from "@/components/landing/how-it-works";
+
+Import map: aliased to relative './src/components/landing/navbar' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:3272
+[  381226ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/demo:0
+[  382314ms] Error: ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/components/landing/cta'
+  4 | import { Features } from "@/components/landing/features";
+  5 | import { HowItWorks } from "@/components/landing/how-it-works";
+> 6 | import { CTA } from "@/components/landing/cta";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import { Footer } from "@/components/landing/footer";
+  8 |
+  9 | export default function Home() {
+
+Import map: aliased to relative './src/components/landing/cta' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (Error: ./src/app/page.tsx:6:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at Object.getCompilationErrors (file:///Users/josep.albiol/Desktop/Lova Meetings/node_modules/next/dist/server/dev/hot-reloader-turbopack.js:1189:59)
+    at DevBundlerService.getCompilationError (file:///Users/josep.albiol/Desktop/Lova Meetings/node_modules/next/dist/server/lib/dev-bundler-service.js:44:55)
+    at DevServer.getCompilationError (file:///Users/josep.albiol/Desktop/Lova Meetings/node_modules/next/dist/server/dev/next-dev-server.js:719:42)
+    at DevServer.findPageComponents (file:///Users/josep.albiol/Desktop/Lova Meetings/node_modules/next/dist/server/dev/next-dev-server.js:689:43)
+    at async DevServer.renderErrorToResponseImpl (file:///Users/josep.albiol/Desktop/Lova Meetings/node_modules/next/dist/server/base-server.js:1686:30)
+[  382110ms] [ERROR] ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/components/landing/cta'
+  4 | import { Features } from "@/components/landing/features";
+  5 | import { HowItWorks } from "@/components/landing/how-it-works";
+> 6 | import { CTA } from "@/components/landing/cta";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import { Footer } from "@/components/landing/footer";
+  8 |
+  9 | export default function Home() {
+
+Import map: aliased to relative './src/components/landing/cta' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[  382110ms] [ERROR] ./src/app/page.tsx:4:1
+Module not found: Can't resolve '@/components/landing/features'
+  2 | import { Navbar } from "@/components/landing/navbar";
+  3 | import { Hero } from "@/components/landing/hero";
+> 4 | import { Features } from "@/components/landing/features";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import { HowItWorks } from "@/components/landing/how-it-works";
+  6 | import { CTA } from "@/components/landing/cta";
+  7 | import { Footer } from "@/components/landing/footer";
+
+Import map: aliased to relative './src/components/landing/features' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[  382110ms] [ERROR] ./src/app/page.tsx:7:1
+Module not found: Can't resolve '@/components/landing/footer'
+   5 | import { HowItWorks } from "@/components/landing/how-it-works";
+   6 | import { CTA } from "@/components/landing/cta";
+>  7 | import { Footer } from "@/components/landing/footer";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 |
+   9 | export default function Home() {
+  10 |   return (
+
+Import map: aliased to relative './src/components/landing/footer' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[  382111ms] [ERROR] ./src/app/page.tsx:3:1
+Module not found: Can't resolve '@/components/landing/hero'
+  1 | import { BackgroundOrbs } from "@/components/ui/background-orbs";
+  2 | import { Navbar } from "@/components/landing/navbar";
+> 3 | import { Hero } from "@/components/landing/hero";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import { Features } from "@/components/landing/features";
+  5 | import { HowItWorks } from "@/components/landing/how-it-works";
+  6 | import { CTA } from "@/components/landing/cta";
+
+Import map: aliased to relative './src/components/landing/hero' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[  382111ms] [ERROR] ./src/app/page.tsx:5:1
+Module not found: Can't resolve '@/components/landing/how-it-works'
+  3 | import { Hero } from "@/components/landing/hero";
+  4 | import { Features } from "@/components/landing/features";
+> 5 | import { HowItWorks } from "@/components/landing/how-it-works";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 | import { CTA } from "@/components/landing/cta";
+  7 | import { Footer } from "@/components/landing/footer";
+  8 |
+
+Import map: aliased to relative './src/components/landing/how-it-works' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[  382111ms] [ERROR] ./src/app/page.tsx:2:1
+Module not found: Can't resolve '@/components/landing/navbar'
+  1 | import { BackgroundOrbs } from "@/components/ui/background-orbs";
+> 2 | import { Navbar } from "@/components/landing/navbar";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  3 | import { Hero } from "@/components/landing/hero";
+  4 | import { Features } from "@/components/landing/features";
+  5 | import { HowItWorks } from "@/components/landing/how-it-works";
+
+Import map: aliased to relative './src/components/landing/navbar' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[  382351ms] [ERROR] ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/components/landing/cta'
+  4 | import { Features } from "@/components/landing/features";
+  5 | import { HowItWorks } from "@/components/landing/how-it-works";
+> 6 | import { CTA } from "@/components/landing/cta";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import { Footer } from "@/components/landing/footer";
+  8 |
+  9 | export default function Home() {
+
+Import map: aliased to relative './src/components/landing/cta' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[  382351ms] [ERROR] ./src/app/page.tsx:4:1
+Module not found: Can't resolve '@/components/landing/features'
+  2 | import { Navbar } from "@/components/landing/navbar";
+  3 | import { Hero } from "@/components/landing/hero";
+> 4 | import { Features } from "@/components/landing/features";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import { HowItWorks } from "@/components/landing/how-it-works";
+  6 | import { CTA } from "@/components/landing/cta";
+  7 | import { Footer } from "@/components/landing/footer";
+
+Import map: aliased to relative './src/components/landing/features' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[  382351ms] [ERROR] ./src/app/page.tsx:7:1
+Module not found: Can't resolve '@/components/landing/footer'
+   5 | import { HowItWorks } from "@/components/landing/how-it-works";
+   6 | import { CTA } from "@/components/landing/cta";
+>  7 | import { Footer } from "@/components/landing/footer";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 |
+   9 | export default function Home() {
+  10 |   return (
+
+Import map: aliased to relative './src/components/landing/footer' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[  382352ms] [ERROR] ./src/app/page.tsx:3:1
+Module not found: Can't resolve '@/components/landing/hero'
+  1 | import { BackgroundOrbs } from "@/components/ui/background-orbs";
+  2 | import { Navbar } from "@/components/landing/navbar";
+> 3 | import { Hero } from "@/components/landing/hero";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import { Features } from "@/components/landing/features";
+  5 | import { HowItWorks } from "@/components/landing/how-it-works";
+  6 | import { CTA } from "@/components/landing/cta";
+
+Import map: aliased to relative './src/components/landing/hero' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[  382352ms] [ERROR] ./src/app/page.tsx:5:1
+Module not found: Can't resolve '@/components/landing/how-it-works'
+  3 | import { Hero } from "@/components/landing/hero";
+  4 | import { Features } from "@/components/landing/features";
+> 5 | import { HowItWorks } from "@/components/landing/how-it-works";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 | import { CTA } from "@/components/landing/cta";
+  7 | import { Footer } from "@/components/landing/footer";
+  8 |
+
+Import map: aliased to relative './src/components/landing/how-it-works' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[  382352ms] [ERROR] ./src/app/page.tsx:2:1
+Module not found: Can't resolve '@/components/landing/navbar'
+  1 | import { BackgroundOrbs } from "@/components/ui/background-orbs";
+> 2 | import { Navbar } from "@/components/landing/navbar";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  3 | import { Hero } from "@/components/landing/hero";
+  4 | import { Features } from "@/components/landing/features";
+  5 | import { HowItWorks } from "@/components/landing/how-it-works";
+
+Import map: aliased to relative './src/components/landing/navbar' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[  382652ms] [ERROR] ./src/app/page.tsx:6:1
+Module not found: Can't resolve '@/components/landing/cta'
+  4 | import { Features } from "@/components/landing/features";
+  5 | import { HowItWorks } from "@/components/landing/how-it-works";
+> 6 | import { CTA } from "@/components/landing/cta";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import { Footer } from "@/components/landing/footer";
+  8 |
+  9 | export default function Home() {
+
+Import map: aliased to relative './src/components/landing/cta' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[  382653ms] [ERROR] ./src/app/page.tsx:4:1
+Module not found: Can't resolve '@/components/landing/features'
+  2 | import { Navbar } from "@/components/landing/navbar";
+  3 | import { Hero } from "@/components/landing/hero";
+> 4 | import { Features } from "@/components/landing/features";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import { HowItWorks } from "@/components/landing/how-it-works";
+  6 | import { CTA } from "@/components/landing/cta";
+  7 | import { Footer } from "@/components/landing/footer";
+
+Import map: aliased to relative './src/components/landing/features' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[  382653ms] [ERROR] ./src/app/page.tsx:7:1
+Module not found: Can't resolve '@/components/landing/footer'
+   5 | import { HowItWorks } from "@/components/landing/how-it-works";
+   6 | import { CTA } from "@/components/landing/cta";
+>  7 | import { Footer } from "@/components/landing/footer";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 |
+   9 | export default function Home() {
+  10 |   return (
+
+Import map: aliased to relative './src/components/landing/footer' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[  382653ms] [ERROR] ./src/app/page.tsx:3:1
+Module not found: Can't resolve '@/components/landing/hero'
+  1 | import { BackgroundOrbs } from "@/components/ui/background-orbs";
+  2 | import { Navbar } from "@/components/landing/navbar";
+> 3 | import { Hero } from "@/components/landing/hero";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import { Features } from "@/components/landing/features";
+  5 | import { HowItWorks } from "@/components/landing/how-it-works";
+  6 | import { CTA } from "@/components/landing/cta";
+
+Import map: aliased to relative './src/components/landing/hero' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[  382653ms] [ERROR] ./src/app/page.tsx:5:1
+Module not found: Can't resolve '@/components/landing/how-it-works'
+  3 | import { Hero } from "@/components/landing/hero";
+  4 | import { Features } from "@/components/landing/features";
+> 5 | import { HowItWorks } from "@/components/landing/how-it-works";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 | import { CTA } from "@/components/landing/cta";
+  7 | import { Footer } from "@/components/landing/footer";
+  8 |
+
+Import map: aliased to relative './src/components/landing/how-it-works' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[  382653ms] [ERROR] ./src/app/page.tsx:2:1
+Module not found: Can't resolve '@/components/landing/navbar'
+  1 | import { BackgroundOrbs } from "@/components/ui/background-orbs";
+> 2 | import { Navbar } from "@/components/landing/navbar";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  3 | import { Hero } from "@/components/landing/hero";
+  4 | import { Features } from "@/components/landing/features";
+  5 | import { HowItWorks } from "@/components/landing/how-it-works";
+
+Import map: aliased to relative './src/components/landing/navbar' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[  388127ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/demo:0
+[  420401ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/demo?_rsc=1nkcf:0
+[  420608ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/demo?_rsc=1nkcf:0
+[  420768ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/demo:0
+[  452140ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/demo?_rsc=1nkcf:0
+[  452373ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/demo?_rsc=1nkcf:0
+[  452526ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/demo:0

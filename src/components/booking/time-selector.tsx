@@ -34,37 +34,27 @@ function formatTime(time: string): string {
 export function TimeSelector({ date, duration, onSelect }: TimeSelectorProps) {
   const slots = generateSlots(duration);
 
-  // Simulate some slots as unavailable (for demo)
-  const unavailable = new Set([2, 5, 7]);
+  // Simulate a few slots as unavailable based on date (for demo purposes)
+  const seed = date.getDate();
+  const unavailable = new Set(
+    slots
+      .map((_, i) => i)
+      .filter((i) => (i + seed) % 7 === 0)
+  );
+
+  const availableSlots = slots.filter((_, i) => !unavailable.has(i));
 
   return (
-    <div>
-      <h3 className="mb-3 font-heading text-sm font-bold text-lova-text">
-        {date.toLocaleDateString("en-US", {
-          weekday: "short",
-          month: "short",
-          day: "numeric",
-        })}
-      </h3>
-      <div className="flex max-h-[320px] flex-col gap-2 overflow-y-auto pr-1">
-        {slots.map((slot, i) => {
-          const disabled = unavailable.has(i);
-          return (
-            <button
-              key={slot}
-              disabled={disabled}
-              onClick={() => onSelect(slot)}
-              className={`rounded-xl px-4 py-2.5 text-sm font-medium transition-all ${
-                disabled
-                  ? "cursor-not-allowed bg-white/30 text-lova-text-muted/40 line-through"
-                  : "border border-lova-border bg-white/60 text-lova-text hover:border-lova-pink/30 hover:bg-lova-pink/5 hover:text-lova-pink"
-              }`}
-            >
-              {formatTime(slot)}
-            </button>
-          );
-        })}
-      </div>
+    <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+      {availableSlots.map((slot) => (
+        <button
+          key={slot}
+          onClick={() => onSelect(slot)}
+          className="rounded-xl border border-lova-border bg-white/60 px-3 py-3 text-sm font-medium text-lova-pink transition-all hover:border-lova-pink hover:bg-lova-pink hover:text-white hover:shadow-md hover:shadow-lova-pink/20"
+        >
+          {formatTime(slot)}
+        </button>
+      ))}
     </div>
   );
 }
