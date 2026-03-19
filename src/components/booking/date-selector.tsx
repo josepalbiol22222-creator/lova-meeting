@@ -10,18 +10,8 @@ interface DateSelectorProps {
 
 const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 const MONTHS = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December",
 ];
 
 function getDaysInMonth(year: number, month: number) {
@@ -30,7 +20,6 @@ function getDaysInMonth(year: number, month: number) {
 
 function getFirstDayOfMonth(year: number, month: number) {
   const day = new Date(year, month, 1).getDay();
-  // Convert Sunday=0 to Monday-based (Mon=0, Sun=6)
   return day === 0 ? 6 : day - 1;
 }
 
@@ -47,6 +36,12 @@ function isWeekend(year: number, month: number, day: number) {
   return d === 0 || d === 6;
 }
 
+// Simulated slot availability (0-1 density) for visual indicator
+function getAvailabilityDensity(day: number): number {
+  const densities = [0.8, 0.6, 0.9, 0.3, 0.7, 0, 0, 0.5, 0.8, 0.4, 0.9, 0.6, 0.3, 0, 0, 0.7, 0.5, 0.8, 0.4, 0.9, 0, 0, 0.6, 0.3, 0.8, 0.7, 0.5, 0, 0, 0.4, 0.9];
+  return densities[(day - 1) % densities.length];
+}
+
 export function DateSelector({ selected, onSelect }: DateSelectorProps) {
   const today = new Date();
   const [viewMonth, setViewMonth] = useState(today.getMonth());
@@ -56,30 +51,18 @@ export function DateSelector({ selected, onSelect }: DateSelectorProps) {
   const firstDay = getFirstDayOfMonth(viewYear, viewMonth);
 
   const prevMonth = () => {
-    if (viewMonth === 0) {
-      setViewMonth(11);
-      setViewYear(viewYear - 1);
-    } else {
-      setViewMonth(viewMonth - 1);
-    }
+    if (viewMonth === 0) { setViewMonth(11); setViewYear(viewYear - 1); }
+    else setViewMonth(viewMonth - 1);
   };
 
   const nextMonth = () => {
-    if (viewMonth === 11) {
-      setViewMonth(0);
-      setViewYear(viewYear + 1);
-    } else {
-      setViewMonth(viewMonth + 1);
-    }
+    if (viewMonth === 11) { setViewMonth(0); setViewYear(viewYear + 1); }
+    else setViewMonth(viewMonth + 1);
   };
 
   const isPast = (day: number) => {
     const date = new Date(viewYear, viewMonth, day);
-    const todayStart = new Date(
-      today.getFullYear(),
-      today.getMonth(),
-      today.getDate()
-    );
+    const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
     return date < todayStart;
   };
 
@@ -90,33 +73,33 @@ export function DateSelector({ selected, onSelect }: DateSelectorProps) {
   return (
     <div>
       {/* Month navigation */}
-      <div className="mb-4 flex items-center justify-between">
-        <h3 className="font-heading text-base font-bold text-lova-text">
+      <div className="mb-5 flex items-center justify-between">
+        <h3 className="font-heading text-[17px] font-bold text-lova-text">
           {MONTHS[viewMonth]} {viewYear}
         </h3>
         <div className="flex gap-1">
           <button
             onClick={prevMonth}
             disabled={!canGoPrev}
-            className="rounded-lg p-1.5 text-lova-text-muted transition-colors hover:bg-white/80 hover:text-lova-text disabled:opacity-30"
+            className="group flex h-8 w-8 items-center justify-center rounded-xl transition-all hover:bg-lova-pink-50 disabled:opacity-20 disabled:hover:bg-transparent"
           >
-            <ChevronLeft className="h-4 w-4" />
+            <ChevronLeft className="h-4 w-4 text-lova-text-muted group-hover:text-lova-pink" />
           </button>
           <button
             onClick={nextMonth}
-            className="rounded-lg p-1.5 text-lova-text-muted transition-colors hover:bg-white/80 hover:text-lova-text"
+            className="group flex h-8 w-8 items-center justify-center rounded-xl transition-all hover:bg-lova-pink-50"
           >
-            <ChevronRight className="h-4 w-4" />
+            <ChevronRight className="h-4 w-4 text-lova-text-muted group-hover:text-lova-pink" />
           </button>
         </div>
       </div>
 
       {/* Day headers */}
-      <div className="mb-2 grid grid-cols-7 gap-1">
+      <div className="mb-1.5 grid grid-cols-7 gap-0.5">
         {DAYS.map((day) => (
           <div
             key={day}
-            className="text-center text-xs font-medium text-lova-text-muted"
+            className="pb-2 text-center text-[11px] font-semibold tracking-wider text-lova-text-muted/60 uppercase"
           >
             {day}
           </div>
@@ -124,45 +107,79 @@ export function DateSelector({ selected, onSelect }: DateSelectorProps) {
       </div>
 
       {/* Day grid */}
-      <div className="grid grid-cols-7 gap-1">
-        {/* Empty cells for offset */}
+      <div className="grid grid-cols-7 gap-0.5">
         {Array.from({ length: firstDay }).map((_, i) => (
-          <div key={`empty-${i}`} />
+          <div key={`empty-${i}`} className="h-10" />
         ))}
 
-        {/* Day cells */}
         {Array.from({ length: daysInMonth }).map((_, i) => {
           const day = i + 1;
           const date = new Date(viewYear, viewMonth, day);
           const isToday = isSameDay(date, today);
           const isSelected = selected ? isSameDay(date, selected) : false;
-          const disabled = isPast(day) || isWeekend(viewYear, viewMonth, day);
+          const weekend = isWeekend(viewYear, viewMonth, day);
+          const past = isPast(day);
+          const disabled = past || weekend;
+          const density = disabled ? 0 : getAvailabilityDensity(day);
 
           return (
             <button
               key={day}
               disabled={disabled}
               onClick={() => onSelect(date)}
-              className={`flex h-10 w-10 items-center justify-center rounded-xl text-sm font-medium transition-all ${
-                isSelected
-                  ? "bg-lova-pink text-white shadow-md shadow-lova-pink/20"
-                  : isToday
-                    ? "bg-lova-pink/10 text-lova-pink hover:bg-lova-pink/20"
-                    : disabled
-                      ? "text-lova-text-muted/30 cursor-not-allowed"
-                      : "text-lova-text hover:bg-white/80"
-              }`}
+              className="group relative flex h-10 items-center justify-center rounded-[12px] transition-all duration-200"
+              style={{
+                background: isSelected
+                  ? "linear-gradient(135deg, #d14d72, #e8749a)"
+                  : undefined,
+                boxShadow: isSelected
+                  ? "0 4px 12px rgba(209, 77, 114, 0.25), 0 1px 3px rgba(209, 77, 114, 0.15)"
+                  : undefined,
+              }}
             >
-              {day}
+              {/* Availability dot indicator */}
+              {!disabled && !isSelected && density > 0 && (
+                <span
+                  className="absolute bottom-1 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full transition-all group-hover:scale-150"
+                  style={{
+                    backgroundColor: `rgba(209, 77, 114, ${0.2 + density * 0.4})`,
+                  }}
+                />
+              )}
+
+              {/* Today ring */}
+              {isToday && !isSelected && (
+                <span className="absolute inset-0.5 rounded-[10px] border-2 border-lova-pink/25" />
+              )}
+
+              <span
+                className={`relative z-10 text-[13px] font-medium transition-all ${
+                  isSelected
+                    ? "text-white font-semibold"
+                    : isToday
+                      ? "text-lova-pink font-semibold"
+                      : disabled
+                        ? "text-lova-text-muted/20"
+                        : "text-lova-text group-hover:text-lova-pink group-hover:font-semibold"
+                }`}
+              >
+                {day}
+              </span>
+
+              {/* Hover background */}
+              {!disabled && !isSelected && (
+                <span className="absolute inset-0.5 rounded-[10px] bg-lova-pink-50 opacity-0 transition-opacity group-hover:opacity-100" />
+              )}
             </button>
           );
         })}
       </div>
 
-      {/* Timezone */}
-      <div className="mt-4 flex items-center gap-1.5 text-xs text-lova-text-muted">
-        <span>
-          {Intl.DateTimeFormat().resolvedOptions().timeZone}
+      {/* Timezone indicator */}
+      <div className="mt-4 flex items-center gap-1.5">
+        <div className="h-1 w-1 rounded-full bg-lova-pink/40" />
+        <span className="text-[11px] tracking-wide text-lova-text-muted/50">
+          {Intl.DateTimeFormat().resolvedOptions().timeZone.replace(/_/g, " ")}
         </span>
       </div>
     </div>

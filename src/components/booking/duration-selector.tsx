@@ -1,7 +1,5 @@
 "use client";
 
-import { Clock } from "lucide-react";
-
 interface DurationSelectorProps {
   durations: number[];
   selected: number;
@@ -14,18 +12,17 @@ export function DurationSelector({
   onChange,
 }: DurationSelectorProps) {
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-1.5">
       {durations.map((d) => (
         <button
           key={d}
           onClick={() => onChange(d)}
-          className={`inline-flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-sm font-medium transition-all ${
+          className={`rounded-xl px-3.5 py-2 text-[12.5px] font-semibold transition-all duration-250 ${
             selected === d
-              ? "bg-lova-pink text-white shadow-md shadow-lova-pink/20"
-              : "bg-white/60 text-lova-text-muted hover:bg-white/80 hover:text-lova-text"
+              ? "bg-gradient-to-r from-lova-pink to-lova-pink-light text-white shadow-md shadow-lova-pink/20"
+              : "bg-lova-pink-50/60 text-lova-text-muted hover:bg-lova-pink-50 hover:text-lova-pink"
           }`}
         >
-          <Clock className="h-3.5 w-3.5" />
           {d} min
         </button>
       ))}

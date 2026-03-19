@@ -1,68 +1,83 @@
 export function BackgroundOrbs() {
   return (
     <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
-      {/* Base gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-lova-cream via-lova-bg to-white" />
+      {/* Base warm gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#fdf6f0] via-lova-bg to-[#f5f0fa]" />
 
-      {/* Subtle grid pattern */}
+      {/* Subtle noise texture */}
       <div
-        className="absolute inset-0 opacity-[0.015]"
+        className="absolute inset-0 opacity-[0.03]"
         style={{
-          backgroundImage: `linear-gradient(rgba(209,77,114,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(209,77,114,0.4) 1px, transparent 1px)`,
-          backgroundSize: "60px 60px",
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
         }}
       />
 
-      {/* Floating orbs */}
+      {/* Soft grid */}
       <div
-        className="absolute rounded-full blur-[100px] animate-float-orb"
+        className="absolute inset-0 opacity-[0.012]"
+        style={{
+          backgroundImage: `linear-gradient(rgba(209,77,114,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(209,77,114,0.5) 1px, transparent 1px)`,
+          backgroundSize: "80px 80px",
+        }}
+      />
+
+      {/* Large pink orb - top right */}
+      <div
+        className="absolute rounded-full blur-[120px] animate-float-orb"
+        style={{
+          width: "500px",
+          height: "500px",
+          top: "5%",
+          right: "10%",
+          background:
+            "radial-gradient(circle, rgba(209,77,114,0.12) 0%, rgba(209,77,114,0.03) 45%, transparent 70%)",
+        }}
+      />
+
+      {/* Lavender orb - bottom left */}
+      <div
+        className="absolute rounded-full blur-[100px] animate-float-orb-slow"
         style={{
           width: "400px",
           height: "400px",
-          top: "10%",
-          left: "60%",
+          bottom: "10%",
+          left: "5%",
           background:
-            "radial-gradient(circle, rgba(209,77,114,0.15) 0%, rgba(209,77,114,0.05) 40%, transparent 70%)",
+            "radial-gradient(circle, rgba(180,160,255,0.14) 0%, rgba(180,160,255,0.04) 45%, transparent 70%)",
         }}
       />
+
+      {/* Peach orb - center */}
       <div
-        className="absolute rounded-full blur-[80px] animate-float-orb-slow"
+        className="absolute rounded-full blur-[90px] animate-float-orb"
         style={{
-          width: "300px",
-          height: "300px",
-          top: "50%",
-          left: "20%",
+          width: "350px",
+          height: "350px",
+          top: "40%",
+          left: "50%",
+          transform: "translateX(-50%)",
           background:
-            "radial-gradient(circle, rgba(232,116,154,0.12) 0%, rgba(232,116,154,0.04) 40%, transparent 70%)",
+            "radial-gradient(circle, rgba(255,200,170,0.12) 0%, transparent 60%)",
+          animationDelay: "5s",
         }}
       />
-      <div
-        className="absolute rounded-full blur-[70px] animate-float-orb"
-        style={{
-          width: "250px",
-          height: "250px",
-          top: "70%",
-          left: "70%",
-          background:
-            "radial-gradient(circle, rgba(232,224,255,0.2) 0%, rgba(232,224,255,0.06) 40%, transparent 70%)",
-          animationDelay: "4s",
-        }}
-      />
+
+      {/* Small accent orb */}
       <div
         className="absolute rounded-full blur-[60px] animate-float-orb-slow"
         style={{
           width: "200px",
           height: "200px",
-          top: "20%",
-          left: "10%",
+          top: "15%",
+          left: "15%",
           background:
-            "radial-gradient(circle, rgba(255,232,214,0.25) 0%, transparent 60%)",
-          animationDelay: "8s",
+            "radial-gradient(circle, rgba(232,116,154,0.1) 0%, transparent 60%)",
+          animationDelay: "10s",
         }}
       />
 
       {/* Vignette */}
-      <div className="absolute inset-0 bg-[radial-gradient(transparent_0%,transparent_70%,rgba(250,249,247,0.4)_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_50%,rgba(250,249,247,0.5)_100%)]" />
     </div>
   );
 }

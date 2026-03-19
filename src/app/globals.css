@@ -9,18 +9,19 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);
   --font-heading: var(--font-heading);
-  --font-mono: var(--font-geist-mono);
 
-  /* Lova brand colors */
+  /* Lova brand palette */
   --color-lova-pink: #d14d72;
   --color-lova-pink-light: #e8749a;
   --color-lova-pink-dark: #b83d62;
+  --color-lova-pink-50: #fef1f5;
+  --color-lova-pink-100: #fde4ec;
   --color-lova-cream: #fdf8f5;
   --color-lova-bg: #faf9f7;
   --color-lova-text: #1a1a1a;
-  --color-lova-text-muted: #6b6b6b;
-  --color-lova-card: rgba(255, 255, 255, 0.85);
-  --color-lova-border: #e3e0dd;
+  --color-lova-text-muted: #8a8a8a;
+  --color-lova-card: rgba(255, 255, 255, 0.92);
+  --color-lova-border: #ebe8e5;
   --color-lova-lavender: #e8e0ff;
   --color-lova-peach: #ffe8d6;
 
@@ -66,7 +67,7 @@
 :root {
   --background: #faf9f7;
   --foreground: #1a1a1a;
-  --card: rgba(255, 255, 255, 0.85);
+  --card: rgba(255, 255, 255, 0.92);
   --card-foreground: #1a1a1a;
   --popover: #ffffff;
   --popover-foreground: #1a1a1a;
@@ -75,12 +76,12 @@
   --secondary: #fdf8f5;
   --secondary-foreground: #1a1a1a;
   --muted: #f5f3f0;
-  --muted-foreground: #6b6b6b;
+  --muted-foreground: #8a8a8a;
   --accent: #fdf8f5;
   --accent-foreground: #1a1a1a;
   --destructive: #ef4444;
-  --border: #e3e0dd;
-  --input: #e3e0dd;
+  --border: #ebe8e5;
+  --input: #ebe8e5;
   --ring: #d14d72;
   --chart-1: #d14d72;
   --chart-2: #e8749a;
@@ -94,7 +95,7 @@
   --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: #fdf8f5;
   --sidebar-accent-foreground: #1a1a1a;
-  --sidebar-border: #e3e0dd;
+  --sidebar-border: #ebe8e5;
   --sidebar-ring: #d14d72;
 }
 
@@ -110,34 +111,186 @@
   }
 }
 
-/* Lova floating orb animations */
+/* ═══════════════════════════════════════
+   PREMIUM ANIMATIONS
+   ═══════════════════════════════════════ */
+
+/* Floating orbs - atmospheric background */
 @keyframes float-orb {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-  33% {
-    transform: translate(30px, -20px) scale(1.05);
-  }
-  66% {
-    transform: translate(-20px, 15px) scale(0.95);
-  }
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(25px, -15px) scale(1.04); }
+  50% { transform: translate(-10px, -30px) scale(0.97); }
+  75% { transform: translate(-25px, 10px) scale(1.02); }
 }
 
 @keyframes float-orb-slow {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-  50% {
-    transform: translate(-15px, -25px) scale(1.03);
-  }
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-20px, -20px) scale(1.03); }
+  66% { transform: translate(15px, -10px) scale(0.98); }
 }
 
 .animate-float-orb {
-  animation: float-orb 12s ease-in-out infinite;
+  animation: float-orb 16s ease-in-out infinite;
 }
 
 .animate-float-orb-slow {
-  animation: float-orb-slow 18s ease-in-out infinite;
+  animation: float-orb-slow 22s ease-in-out infinite;
+}
+
+/* Staggered entrance for time slots */
+@keyframes slot-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-slot-enter {
+  animation: slot-enter 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+}
+
+/* Panel slide transitions */
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-slide-right {
+  animation: slide-in-right 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-left {
+  animation: slide-in-left 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade-up {
+  animation: fade-up 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Confirmation checkmark */
+@keyframes check-draw {
+  from { stroke-dashoffset: 40; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes check-circle {
+  from { stroke-dashoffset: 166; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes check-bg-fill {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.animate-check-circle {
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  animation: check-circle 0.6s cubic-bezier(0.65, 0, 0.45, 1) 0.15s forwards;
+}
+
+.animate-check-draw {
+  stroke-dasharray: 40;
+  stroke-dashoffset: 40;
+  animation: check-draw 0.35s cubic-bezier(0.65, 0, 0.45, 1) 0.55s forwards;
+}
+
+.animate-check-bg {
+  animation: check-bg-fill 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Pulse ring on selected date */
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+.animate-pulse-ring::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: rgba(209, 77, 114, 0.3);
+  animation: pulse-ring 1s cubic-bezier(0, 0, 0.2, 1) forwards;
+}
+
+/* Shimmer effect for loading states */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(209, 77, 114, 0.06), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+/* Subtle float for the main card */
+@keyframes card-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+/* Custom scrollbar for time slots */
+.slots-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+.slots-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.slots-scroll::-webkit-scrollbar-thumb {
+  background: rgba(209, 77, 114, 0.15);
+  border-radius: 10px;
+}
+.slots-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(209, 77, 114, 0.3);
 }
