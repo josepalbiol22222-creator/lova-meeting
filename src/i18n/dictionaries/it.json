@@ -1,0 +1,45 @@
+{
+  "booking": {
+    "poweredBy": "Powered by",
+    "poweredByBrand": "Lova",
+    "googleMeet": "Google Meet",
+    "book": "Prenota"
+  },
+  "form": {
+    "back": "Indietro",
+    "yourDetails": "I tuoi dati",
+    "firstName": "Nome",
+    "lastName": "Cognome",
+    "email": "Email",
+    "firstNamePlaceholder": "Marco",
+    "lastNamePlaceholder": "Rossi",
+    "emailPlaceholder": "marco@azienda.com",
+    "addGuests": "Aggiungi ospiti",
+    "guestEmails": "Email degli ospiti",
+    "guestEmailPlaceholder": "ospite@azienda.com",
+    "guestEmailsHint": "Separa le email con virgole",
+    "additionalNotes": "Note aggiuntive",
+    "notesPlaceholder": "Qualcosa di cui vorresti discutere...",
+    "scheduleMeeting": "Pianifica riunione",
+    "required": "Obbligatorio",
+    "invalidEmail": "Inserisci un'email valida"
+  },
+  "calendar": {
+    "days": ["Lun", "Mar", "Mer", "Gio", "Ven", "Sab", "Dom"],
+    "months": [
+      "Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno",
+      "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"
+    ],
+    "morning": "Mattina",
+    "afternoon": "Pomeriggio"
+  },
+  "confirmation": {
+    "confirmed": "Confermato",
+    "meetingScheduled": "Riunione pianificata",
+    "calendarInviteSent": "Un invito è stato inviato a",
+    "minutes": "minuti",
+    "linkInInvite": "link nel tuo invito",
+    "with": "con",
+    "scheduleAnother": "Pianifica un'altra"
+  }
+}

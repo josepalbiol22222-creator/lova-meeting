@@ -2,6 +2,8 @@
 
 import { useMemo } from "react";
 import { Sun, Sunset } from "lucide-react";
+import { useDictionary } from "@/i18n/dictionary-context";
+import { useLocale } from "@/i18n/locale-context";
 
 interface TimeSelectorProps {
   date: Date;
@@ -27,6 +29,8 @@ function formatTime(time: string): string {
 }
 
 export function TimeSelector({ date, duration, onSelect }: TimeSelectorProps) {
+  const dict = useDictionary();
+  const locale = useLocale();
   const slots = useMemo(() => generateSlots(duration), [duration]);
 
   const { morning, afternoon } = useMemo(() => {
@@ -42,23 +46,23 @@ export function TimeSelector({ date, duration, onSelect }: TimeSelectorProps) {
   return (
     <div>
       <p className="mb-4 text-[14px] font-semibold text-navy">
-        {date.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" })}
+        {date.toLocaleDateString(locale, { weekday: "short", month: "short", day: "numeric" })}
       </p>
 
       <div className="slots-scroll flex max-h-[360px] flex-col gap-4 overflow-y-auto pr-1">
         {morning.length > 0 && (
-          <SlotGroup icon={<Sun className="h-3 w-3" />} label="Morning" slots={morning} onSelect={onSelect} startIndex={0} />
+          <SlotGroup icon={<Sun className="h-3 w-3" />} label={dict.calendar.morning} slots={morning} onSelect={onSelect} startIndex={0} bookLabel={dict.booking.book} />
         )}
         {afternoon.length > 0 && (
-          <SlotGroup icon={<Sunset className="h-3 w-3" />} label="Afternoon" slots={afternoon} onSelect={onSelect} startIndex={morning.length} />
+          <SlotGroup icon={<Sunset className="h-3 w-3" />} label={dict.calendar.afternoon} slots={afternoon} onSelect={onSelect} startIndex={morning.length} bookLabel={dict.booking.book} />
         )}
       </div>
     </div>
   );
 }
 
-function SlotGroup({ icon, label, slots, onSelect, startIndex }: {
-  icon: React.ReactNode; label: string; slots: string[]; onSelect: (time: string) => void; startIndex: number;
+function SlotGroup({ icon, label, slots, onSelect, startIndex, bookLabel }: {
+  icon: React.ReactNode; label: string; slots: string[]; onSelect: (time: string) => void; startIndex: number; bookLabel: string;
 }) {
   return (
     <div>
@@ -78,7 +82,7 @@ function SlotGroup({ icon, label, slots, onSelect, startIndex }: {
               {formatTime(slot)}
             </span>
             <span className="flex items-center gap-0.5 text-[11px] font-semibold text-radical opacity-0 transition-all duration-200 translate-x-1 group-hover:opacity-100 group-hover:translate-x-0">
-              Book
+              {bookLabel}
               <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M3.5 2L6.5 5L3.5 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
             </span>
           </button>

@@ -18,7 +18,6 @@ export default function Home() {
           durations={[15, 30, 60]}
           defaultDuration={30}
         />
-
       </div>
     </>
   );

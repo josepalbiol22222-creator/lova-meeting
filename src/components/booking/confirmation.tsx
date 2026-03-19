@@ -1,6 +1,8 @@
 "use client";
 
 import { Calendar, Clock, User, Video, RotateCcw } from "lucide-react";
+import { useDictionary } from "@/i18n/dictionary-context";
+import { useLocale } from "@/i18n/locale-context";
 
 interface ConfirmationProps {
   name: string;
@@ -18,6 +20,9 @@ function formatTime(time: string): string {
 }
 
 export function Confirmation({ name, email, date, time, duration, organizerName, onBookAnother }: ConfirmationProps) {
+  const dict = useDictionary();
+  const locale = useLocale();
+
   return (
     <div className="flex flex-col items-center text-center">
       <div className="mb-5 animate-check-bg">
@@ -28,23 +33,23 @@ export function Confirmation({ name, email, date, time, duration, organizerName,
         </svg>
       </div>
 
-      <p className="text-[12px] font-semibold tracking-widest text-radical uppercase">Confirmed</p>
-      <h3 className="mt-1 text-[18px] font-semibold tracking-[-0.01em] text-navy">Meeting scheduled</h3>
+      <p className="text-[12px] font-semibold tracking-widest text-radical uppercase">{dict.confirmation.confirmed}</p>
+      <h3 className="mt-1 text-[18px] font-semibold tracking-[-0.01em] text-navy">{dict.confirmation.meetingScheduled}</h3>
       <p className="mt-2.5 max-w-[260px] text-[13px] leading-relaxed text-navy-40">
-        A calendar invitation has been sent to <span className="font-medium text-navy">{email}</span>
+        {dict.confirmation.calendarInviteSent} <span className="font-medium text-navy">{email}</span>
       </p>
 
       <div className="mt-8 w-full animate-fade-up rounded-2xl border border-navy-5 bg-navy-2/50 p-5" style={{ animationDelay: "0.4s", opacity: 0 }}>
         <div className="space-y-3">
-          <DetailRow icon={Calendar}>{date.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" })}</DetailRow>
-          <DetailRow icon={Clock}>{formatTime(time)} &middot; {duration} minutes</DetailRow>
-          <DetailRow icon={Video}>Google Meet &middot; <span className="text-viridian-dark">link in your invite</span></DetailRow>
-          <DetailRow icon={User}>{name} with {organizerName}</DetailRow>
+          <DetailRow icon={Calendar}>{date.toLocaleDateString(locale, { weekday: "long", month: "long", day: "numeric", year: "numeric" })}</DetailRow>
+          <DetailRow icon={Clock}>{formatTime(time)} &middot; {duration} {dict.confirmation.minutes}</DetailRow>
+          <DetailRow icon={Video}>{dict.booking.googleMeet} &middot; <span className="text-viridian-dark">{dict.confirmation.linkInInvite}</span></DetailRow>
+          <DetailRow icon={User}>{name} {dict.confirmation.with} {organizerName}</DetailRow>
         </div>
       </div>
 
       <button onClick={onBookAnother} className="group mt-8 inline-flex items-center gap-2 rounded-full border border-navy-10 bg-white px-5 py-2.5 text-[12.5px] font-semibold text-navy-60 shadow-sm transition-all hover:border-radical/30 hover:text-radical hover:shadow-md hover:shadow-radical/5">
-        <RotateCcw className="h-3.5 w-3.5 transition-transform group-hover:-rotate-90" /> Schedule another
+        <RotateCcw className="h-3.5 w-3.5 transition-transform group-hover:-rotate-90" /> {dict.confirmation.scheduleAnother}
       </button>
 
     </div>

@@ -8,6 +8,10 @@ import { BookingForm } from "./booking-form";
 import { Confirmation } from "./confirmation";
 import { Clock, Video, Globe } from "lucide-react";
 import { FactorialLogo } from "@/components/ui/factorial-logo";
+import { LanguageSwitcher } from "@/components/ui/language-switcher";
+import { ProgressBar } from "./progress-bar";
+import { useDictionary } from "@/i18n/dictionary-context";
+import { useLocale } from "@/i18n/locale-context";
 
 type Step = "select" | "form" | "confirmed";
 
@@ -43,6 +47,8 @@ export function BookingWidget({
   } | null>(null);
 
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const dict = useDictionary();
+  const locale = useLocale();
 
   const handleTimeSelect = useCallback((time: string) => {
     setSelectedTime(time);
@@ -71,6 +77,9 @@ export function BookingWidget({
       <div className="w-full max-w-[480px] animate-scale-in">
         <WidgetShell>
           <div className="p-10 sm:p-12">
+            <div className="mb-8 flex justify-center">
+              <ProgressBar currentStep={3} />
+            </div>
             <Confirmation
               name={bookedDetails.name}
               email={bookedDetails.email}
@@ -134,7 +143,7 @@ export function BookingWidget({
               {/* Meta chips */}
               <div className="flex flex-wrap gap-1.5">
                 <MetaChip icon={Clock} text={`${selectedDuration}m`} />
-                <MetaChip icon={Video} text="Google Meet" />
+                <MetaChip icon={Video} text={dict.booking.googleMeet} />
                 <MetaChip icon={Globe} text={timezone.split("/").pop()?.replace(/_/g, " ") || timezone} />
               </div>
 
@@ -150,7 +159,7 @@ export function BookingWidget({
                 <div className="mt-4 animate-fade-up">
                   <div className="rounded-xl bg-radical-50/80 p-3">
                     <p className="text-[12.5px] font-semibold text-navy">
-                      {selectedDate.toLocaleDateString("en-US", { weekday: "long", month: "short", day: "numeric" })}
+                      {selectedDate.toLocaleDateString(locale, { weekday: "long", month: "short", day: "numeric" })}
                     </p>
                     <p className="mt-0.5 text-[11.5px] font-semibold text-radical">
                       {formatTime(selectedTime)} – {formatEndTime(selectedTime, selectedDuration)}
@@ -163,6 +172,15 @@ export function BookingWidget({
 
           {/* ═══ Right panel ═══ */}
           <div className="flex-1 p-7 lg:p-8">
+            {/* Progress */}
+            <div className="mb-6">
+              <ProgressBar
+                currentStep={
+                  step === "form" ? 2 : selectedDate ? 1 : 0
+                }
+              />
+            </div>
+
             {step === "select" && (
               <div className="flex flex-col gap-6 sm:flex-row sm:gap-0">
                 <div className={`transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${selectedDate ? "sm:w-[55%] sm:pr-6 sm:border-r sm:border-navy-5/50" : "w-full"}`}>
@@ -194,9 +212,13 @@ function WidgetShell({ children }: { children: React.ReactNode }) {
       <div className="w-full overflow-hidden rounded-[20px] border border-navy-10/50 bg-white shadow-[0_1px_3px_rgba(26,26,49,0.05),0_8px_24px_rgba(26,26,49,0.04)]">
         {children}
       </div>
-      <p className="text-[11.5px] text-navy-20">
-        Powered by <span className="font-medium text-navy-40">Lova</span>
-      </p>
+      <div className="flex items-center gap-3">
+        <p className="text-[11.5px] text-navy-20">
+          Powered by <span className="font-medium text-navy-40">Lova</span>
+        </p>
+        <span className="text-navy-10">|</span>
+        <LanguageSwitcher />
+      </div>
     </div>
   );
 }

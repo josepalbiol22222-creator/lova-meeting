@@ -2,17 +2,12 @@
 
 import { useState, useMemo, useCallback } from "react";
 import { ChevronLeft, ChevronRight, Globe } from "lucide-react";
+import { useDictionary } from "@/i18n/dictionary-context";
 
 interface DateSelectorProps {
   selected: Date | null;
   onSelect: (date: Date) => void;
 }
-
-const DAYS = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"] as const;
-const MONTHS = [
-  "January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December",
-] as const;
 
 const DENSITY_MAP = [0.8, 0.6, 0.9, 0.3, 0.7, 0, 0, 0.5, 0.8, 0.4, 0.9, 0.6, 0.3, 0, 0, 0.7, 0.5, 0.8, 0.4, 0.9, 0, 0, 0.6, 0.3, 0.8, 0.7, 0.5, 0, 0, 0.4, 0.9] as const;
 
@@ -21,6 +16,7 @@ function getFirstDayOfMonth(y: number, m: number) { const d = new Date(y, m, 1).
 function isSameDay(a: Date, b: Date) { return a.getDate() === b.getDate() && a.getMonth() === b.getMonth() && a.getFullYear() === b.getFullYear(); }
 
 export function DateSelector({ selected, onSelect }: DateSelectorProps) {
+  const dict = useDictionary();
   const today = useMemo(() => new Date(), []);
   const todayStart = useMemo(() => new Date(today.getFullYear(), today.getMonth(), today.getDate()), [today]);
   const [viewMonth, setViewMonth] = useState(today.getMonth());
@@ -57,7 +53,7 @@ export function DateSelector({ selected, onSelect }: DateSelectorProps) {
     <div>
       <div className="mb-4 flex items-center justify-between">
         <div>
-          <h3 className="text-[17px] font-semibold tracking-[-0.01em] text-navy">{MONTHS[viewMonth]}</h3>
+          <h3 className="text-[17px] font-semibold tracking-[-0.01em] text-navy">{dict.calendar.months[viewMonth]}</h3>
           <p className="text-[11px] font-medium text-navy-20">{viewYear}</p>
         </div>
         <div className="flex gap-0.5">
@@ -71,7 +67,7 @@ export function DateSelector({ selected, onSelect }: DateSelectorProps) {
       </div>
 
       <div className="mb-1 grid grid-cols-7">
-        {DAYS.map((day) => (
+        {dict.calendar.days.map((day: string) => (
           <div key={day} className="flex h-8 items-center justify-center text-[10.5px] font-semibold tracking-wider text-navy-20 uppercase">{day}</div>
         ))}
       </div>
