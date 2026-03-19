@@ -1,7 +1,6 @@
 "use client";
 
 import { Calendar, Clock, User, Video, RotateCcw } from "lucide-react";
-import { FactorialLogo } from "@/components/ui/factorial-logo";
 
 interface ConfirmationProps {
   name: string;
@@ -21,17 +20,18 @@ function formatTime(time: string): string {
 export function Confirmation({ name, email, date, time, duration, organizerName, onBookAnother }: ConfirmationProps) {
   return (
     <div className="flex flex-col items-center text-center">
-      <div className="mb-7 animate-check-bg">
-        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
-          <circle cx="40" cy="40" r="36" stroke="#FF355E" strokeWidth="2.5" fill="none" className="animate-check-circle" />
-          <circle cx="40" cy="40" r="32" fill="#FFF0F3" />
-          <path d="M26 40l10 10 18-18" stroke="#FF355E" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none" className="animate-check-draw" />
+      <div className="mb-5 animate-check-bg">
+        <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+          <circle cx="28" cy="28" r="25" stroke="#FF355E" strokeWidth="2" fill="none" className="animate-check-circle" />
+          <circle cx="28" cy="28" r="22" fill="#FFF0F3" />
+          <path d="M18 28l7 7 13-13" stroke="#FF355E" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none" className="animate-check-draw" />
         </svg>
       </div>
 
-      <h3 className="font-heading text-[26px] font-extrabold tracking-[-0.02em] text-navy">You&apos;re booked!</h3>
-      <p className="mt-2 max-w-[280px] text-[13.5px] leading-relaxed text-navy-40">
-        A calendar invitation has been sent to <span className="font-semibold text-navy">{email}</span>
+      <p className="text-[12px] font-semibold tracking-widest text-radical uppercase">Confirmed</p>
+      <h3 className="mt-1 font-heading text-[20px] font-bold tracking-[-0.01em] text-navy">Meeting scheduled</h3>
+      <p className="mt-2.5 max-w-[260px] text-[13px] leading-relaxed text-navy-40">
+        A calendar invitation has been sent to <span className="font-medium text-navy">{email}</span>
       </p>
 
       <div className="mt-8 w-full animate-fade-up rounded-2xl border border-navy-5 bg-navy-2/50 p-5" style={{ animationDelay: "0.4s", opacity: 0 }}>
@@ -47,10 +47,6 @@ export function Confirmation({ name, email, date, time, duration, organizerName,
         <RotateCcw className="h-3.5 w-3.5 transition-transform group-hover:-rotate-90" /> Schedule another
       </button>
 
-      <div className="mt-8 flex items-center gap-1.5 opacity-20">
-        <FactorialLogo className="h-2.5 w-2.5" color="#1A1A31" />
-        <span className="text-[9px] font-semibold tracking-widest text-navy uppercase">Scheduled with Factorial</span>
-      </div>
     </div>
   );
 }

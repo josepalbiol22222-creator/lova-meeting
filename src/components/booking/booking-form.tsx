@@ -36,7 +36,7 @@ export function BookingForm({ onSubmit, onBack }: BookingFormProps) {
 
   const inputCls = (field: string) =>
     `w-full rounded-xl border bg-white px-4 py-3 text-[13.5px] text-navy placeholder:text-navy-20 transition-colors focus:outline-none focus:ring-2 ${
-      errors[field] ? "border-radical/40 focus:border-radical focus:ring-radical/10" : "border-navy-5 focus:border-radical/30 focus:ring-radical/10"
+      errors[field] ? "border-radical/40 focus:border-radical focus:ring-radical/10" : "border-navy-10 focus:border-radical/30 focus:ring-radical/10"
     }`;
 
   return (
@@ -81,7 +81,7 @@ export function BookingForm({ onSubmit, onBack }: BookingFormProps) {
 
         <div>
           <label htmlFor="notes" className="mb-1.5 block text-[13px] font-medium text-navy-80">Additional notes</label>
-          <textarea id="notes" value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="Anything you'd like to discuss..." rows={3} className="w-full resize-none rounded-xl border border-navy-5 bg-white px-4 py-3 text-[13.5px] text-navy placeholder:text-navy-20 transition-colors focus:border-radical/30 focus:outline-none focus:ring-2 focus:ring-radical/10" />
+          <textarea id="notes" value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="Anything you'd like to discuss..." rows={3} className="w-full resize-none rounded-xl border border-navy-10 bg-white px-4 py-3 text-[13.5px] text-navy placeholder:text-navy-20 transition-colors focus:border-radical/30 focus:outline-none focus:ring-2 focus:ring-radical/10" />
         </div>
       </div>
 
@@ -89,12 +89,12 @@ export function BookingForm({ onSubmit, onBack }: BookingFormProps) {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="group mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-radical px-6 py-4 text-[14px] font-semibold text-white shadow-lg shadow-radical/15 transition-all hover:bg-radical-dark hover:shadow-xl hover:shadow-radical/20 disabled:opacity-70 disabled:cursor-not-allowed"
+        className="group mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-radical px-6 py-3.5 text-[13.5px] font-semibold text-white shadow-md shadow-radical/12 transition-all hover:bg-radical-dark hover:shadow-lg hover:shadow-radical/18 disabled:opacity-70 disabled:cursor-not-allowed"
       >
         {isSubmitting ? (
           <div className="h-5 w-5 animate-spin rounded-full border-2 border-white/30 border-t-white" />
         ) : (
-          <>Schedule Meeting <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" /></>
+          <>Schedule Meeting <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" /></>
         )}
       </button>
     </form>

@@ -91,55 +91,45 @@ export function BookingWidget({
       <WidgetShell>
         <div className="flex flex-col lg:flex-row">
           {/* ═══ Left panel ═══ */}
-          <div className="relative overflow-hidden border-b border-navy-5 lg:w-[290px] lg:shrink-0 lg:border-b-0 lg:border-r">
-            {/* Gradient bg — subtle radical warmth */}
-            <div className="absolute inset-0 bg-gradient-to-b from-radical-50/60 via-white/60 to-white/0" />
-            {/* Frobel decorative circle */}
-            <div className="absolute -right-16 -top-16 h-32 w-32 rounded-full border border-radical/[0.06]" />
-            <div className="absolute -right-10 -top-10 h-20 w-20 rounded-full border border-viridian/[0.05]" />
+          <div className="relative border-b border-navy-5/40 lg:w-[280px] lg:shrink-0 lg:border-b-0 lg:border-r">
+            {/* Subtle warm tint */}
+            <div className="absolute inset-0 bg-gradient-to-b from-radical-50/40 to-transparent" />
 
-            <div className="relative p-8 lg:p-9">
-              {/* Avatar + Factorial badge */}
-              <div className="mb-5 inline-flex">
-                <div className="relative">
-                  <div className="flex h-[60px] w-[60px] items-center justify-center rounded-2xl bg-gradient-to-br from-radical to-radical-light shadow-lg shadow-radical/15 ring-[3px] ring-white">
+            <div className="relative p-7 lg:p-8">
+              {/* Avatar inside card */}
+              <div className="mb-5 flex items-start gap-3.5">
+                <div className="relative shrink-0">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-radical to-radical-light shadow-md shadow-radical/15">
                     {organizer.avatar ? (
-                      <img src={organizer.avatar} alt={organizer.name} className="h-full w-full rounded-2xl object-cover" />
+                      <img src={organizer.avatar} alt={organizer.name} className="h-full w-full rounded-xl object-cover" />
                     ) : (
-                      <span className="font-heading text-[17px] font-bold text-white tracking-wide">
+                      <span className="font-heading text-[15px] font-bold text-white">
                         {organizer.name.split(" ").map((n) => n[0]).join("")}
                       </span>
                     )}
                   </div>
-                  <div className="absolute -bottom-1 -right-1 flex h-[18px] w-[18px] items-center justify-center rounded-full border-2 border-white bg-white shadow-sm">
-                    <FactorialLogo className="h-2.5 w-2.5" color="#FF355E" />
+                  <div className="absolute -bottom-0.5 -right-0.5 flex h-4 w-4 items-center justify-center rounded-full border-[1.5px] border-white bg-white shadow-sm">
+                    <FactorialLogo className="h-2 w-2" color="#FF355E" />
                   </div>
+                </div>
+                <div className="min-w-0 pt-0.5">
+                  <p className="text-[12.5px] font-medium text-navy-40">
+                    {organizer.name}{organizer.company && <span className="text-navy-20"> · {organizer.company}</span>}
+                  </p>
+                  <h1 className="font-heading text-[19px] font-extrabold leading-[1.25] tracking-[-0.01em] text-navy">
+                    {meetingTitle}
+                  </h1>
                 </div>
               </div>
 
-              {/* Name + company */}
-              <div className="flex items-center gap-1.5">
-                <p className="text-[13px] font-medium text-navy-60">{organizer.name}</p>
-                {organizer.company && (
-                  <>
-                    <span className="text-navy-20">&middot;</span>
-                    <p className="text-[13px] text-navy-40">{organizer.company}</p>
-                  </>
-                )}
-              </div>
-
-              <h1 className="mt-1 font-heading text-[22px] font-extrabold leading-[1.2] tracking-[-0.01em] text-navy">
-                {meetingTitle}
-              </h1>
-
               {meetingDescription && (
-                <p className="mt-3 text-[13px] leading-[1.65] text-navy-40">
+                <p className="text-[12.5px] leading-[1.6] text-navy-40">
                   {meetingDescription}
                 </p>
               )}
 
               {/* Divider */}
-              <div className="my-5 h-px bg-gradient-to-r from-navy-10 via-navy-5 to-transparent" />
+              <div className="my-4 h-px bg-navy-5/60" />
 
               {/* Meta chips */}
               <div className="flex flex-wrap gap-1.5">
@@ -150,42 +140,36 @@ export function BookingWidget({
 
               {/* Duration tabs */}
               {durations.length > 1 && step === "select" && (
-                <div className="mt-5">
+                <div className="mt-4">
                   <DurationSelector durations={durations} selected={selectedDuration} onChange={setSelectedDuration} />
                 </div>
               )}
 
-              {/* Selected slot summary */}
+              {/* Selected slot summary (form step) */}
               {step === "form" && selectedDate && selectedTime && (
-                <div className="mt-5 animate-fade-up">
-                  <div className="rounded-xl border border-radical/10 bg-radical-50 p-3.5">
-                    <p className="text-[13px] font-semibold text-navy">
+                <div className="mt-4 animate-fade-up">
+                  <div className="rounded-xl bg-radical-50/80 p-3">
+                    <p className="text-[12.5px] font-semibold text-navy">
                       {selectedDate.toLocaleDateString("en-US", { weekday: "long", month: "short", day: "numeric" })}
                     </p>
-                    <p className="mt-0.5 text-[12px] font-semibold text-radical">
+                    <p className="mt-0.5 text-[11.5px] font-semibold text-radical">
                       {formatTime(selectedTime)} – {formatEndTime(selectedTime, selectedDuration)}
                     </p>
                   </div>
                 </div>
               )}
-
-              {/* Factorial watermark at bottom of panel */}
-              <div className="mt-6 flex items-center gap-1.5 opacity-[0.15]">
-                <FactorialLogo className="h-3 w-3" color="#1A1A31" />
-                <span className="text-[9px] font-semibold tracking-widest text-navy uppercase">Factorial</span>
-              </div>
             </div>
           </div>
 
           {/* ═══ Right panel ═══ */}
-          <div className="flex-1 p-8 lg:p-9">
+          <div className="flex-1 p-7 lg:p-8">
             {step === "select" && (
               <div className="flex flex-col gap-6 sm:flex-row sm:gap-0">
-                <div className={`transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${selectedDate ? "sm:w-[54%] sm:pr-7 sm:border-r sm:border-navy-5/60" : "w-full"}`}>
+                <div className={`transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${selectedDate ? "sm:w-[55%] sm:pr-6 sm:border-r sm:border-navy-5/50" : "w-full"}`}>
                   <DateSelector selected={selectedDate} onSelect={setSelectedDate} />
                 </div>
                 {selectedDate && (
-                  <div className="animate-slide-right sm:w-[46%] sm:pl-7">
+                  <div className="animate-slide-right sm:w-[45%] sm:pl-6">
                     <TimeSelector date={selectedDate} duration={selectedDuration} onSelect={handleTimeSelect} />
                   </div>
                 )}
@@ -207,9 +191,9 @@ export function BookingWidget({
 function WidgetShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="relative">
-      {/* Factorial radical accent line */}
-      <div className="absolute left-10 right-10 top-0 z-10 h-[2px] rounded-full bg-gradient-to-r from-transparent via-radical to-transparent opacity-30" />
-      <div className="overflow-hidden rounded-[24px] border border-navy-5 bg-white/[0.97] shadow-[0_1px_2px_rgba(26,26,49,0.04),0_4px_16px_rgba(26,26,49,0.04),0_12px_48px_rgba(255,53,94,0.03)] backdrop-blur-xl">
+      {/* Radical accent line — stronger */}
+      <div className="absolute left-6 right-6 top-0 z-10 h-[2.5px] rounded-full bg-gradient-to-r from-radical/0 via-radical/50 to-radical/0" />
+      <div className="overflow-hidden rounded-[22px] border border-navy-10/60 bg-white shadow-[0_1px_3px_rgba(26,26,49,0.06),0_8px_32px_rgba(26,26,49,0.05)] backdrop-blur-xl">
         {children}
       </div>
     </div>
@@ -218,7 +202,7 @@ function WidgetShell({ children }: { children: React.ReactNode }) {
 
 function MetaChip({ icon: Icon, text }: { icon: typeof Clock; text: string }) {
   return (
-    <div className="inline-flex items-center gap-1.5 rounded-full bg-navy-2 px-2.5 py-1.5">
+    <div className="inline-flex items-center gap-1.5 rounded-lg bg-navy-2 px-2.5 py-1.5">
       <Icon className="h-3 w-3 text-navy-40" />
       <span className="text-[11px] font-medium text-navy-60">{text}</span>
     </div>
