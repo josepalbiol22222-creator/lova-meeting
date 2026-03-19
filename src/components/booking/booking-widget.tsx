@@ -8,7 +8,6 @@ import { BookingForm } from "./booking-form";
 import { Confirmation } from "./confirmation";
 import { Clock, Video, Globe } from "lucide-react";
 import { FactorialLogo } from "@/components/ui/factorial-logo";
-import { LanguageSwitcher } from "@/components/ui/language-switcher";
 import { ProgressBar } from "./progress-bar";
 import { useDictionary } from "@/i18n/dictionary-context";
 import { useLocale } from "@/i18n/locale-context";
@@ -98,11 +97,6 @@ export function BookingWidget({
   return (
     <div className="w-full max-w-[880px] animate-fade-up">
       <WidgetShell>
-        {/* Language switcher — top right */}
-        <div className="flex justify-end px-5 pt-4 pb-0">
-          <LanguageSwitcher />
-        </div>
-
         <div className="flex flex-col lg:flex-row">
           {/* ═══ Left panel ═══ */}
           <div className="relative border-b border-navy-5/40 lg:w-[280px] lg:shrink-0 lg:border-b-0 lg:border-r">
@@ -164,7 +158,7 @@ export function BookingWidget({
                 <img
                   src="https://4960096.fs1.hubspotusercontent-eu1.net/hubfs/4960096/LOGO-RESOLVE-A-IN.gif"
                   alt="Factorial"
-                  className="h-12 opacity-50"
+                  className="h-20 opacity-50"
                 />
               </div>
 
