@@ -161,13 +161,13 @@ export function BookingWidget({
 
               {/* Duration tabs */}
               {durations.length > 1 && step === "select" && (
-                <div className="mt-4">
+                <div className="mt-4 flex justify-center">
                   <DurationSelector durations={durations} selected={selectedDuration} onChange={setSelectedDuration} />
                 </div>
               )}
 
-              {/* Factorial animated logo */}
-              <div className="mt-5">
+              {/* Factorial animated logo — centered with duration tabs */}
+              <div className="mt-5 flex justify-center">
                 <img
                   src="https://4960096.fs1.hubspotusercontent-eu1.net/hubfs/4960096/LOGO-RESOLVE-A-IN.gif"
                   alt="Factorial"
