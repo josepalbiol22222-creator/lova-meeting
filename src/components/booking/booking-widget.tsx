@@ -6,7 +6,7 @@ import { DateSelector } from "./date-selector";
 import { TimeSelector } from "./time-selector";
 import { BookingForm } from "./booking-form";
 import { Confirmation } from "./confirmation";
-import { Clock, Video, Globe, MapPin } from "lucide-react";
+import { Clock, Video, Globe } from "lucide-react";
 
 type Step = "select" | "form" | "confirmed";
 

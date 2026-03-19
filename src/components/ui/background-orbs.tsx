@@ -1,6 +1,12 @@
+// Server component - no "use client" needed (pure static presentation)
+
 export function BackgroundOrbs() {
   return (
-    <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
+    <div
+      className="fixed inset-0 overflow-hidden pointer-events-none -z-10"
+      style={{ contain: "strict" }}
+      aria-hidden="true"
+    >
       {/* Base warm gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#fdf6f0] via-lova-bg to-[#f5f0fa]" />
 
@@ -21,7 +27,7 @@ export function BackgroundOrbs() {
         }}
       />
 
-      {/* Large pink orb - top right */}
+      {/* Orbs - GPU composited via will-change in CSS class */}
       <div
         className="absolute rounded-full blur-[120px] animate-float-orb"
         style={{
@@ -33,8 +39,6 @@ export function BackgroundOrbs() {
             "radial-gradient(circle, rgba(209,77,114,0.12) 0%, rgba(209,77,114,0.03) 45%, transparent 70%)",
         }}
       />
-
-      {/* Lavender orb - bottom left */}
       <div
         className="absolute rounded-full blur-[100px] animate-float-orb-slow"
         style={{
@@ -46,8 +50,6 @@ export function BackgroundOrbs() {
             "radial-gradient(circle, rgba(180,160,255,0.14) 0%, rgba(180,160,255,0.04) 45%, transparent 70%)",
         }}
       />
-
-      {/* Peach orb - center */}
       <div
         className="absolute rounded-full blur-[90px] animate-float-orb"
         style={{
@@ -61,8 +63,6 @@ export function BackgroundOrbs() {
           animationDelay: "5s",
         }}
       />
-
-      {/* Small accent orb */}
       <div
         className="absolute rounded-full blur-[60px] animate-float-orb-slow"
         style={{

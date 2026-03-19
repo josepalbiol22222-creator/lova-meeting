@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { ArrowLeft, UserPlus, ArrowRight } from "lucide-react";
 
 interface BookingFormProps {
@@ -18,46 +18,55 @@ export function BookingForm({ onSubmit, onBack }: BookingFormProps) {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const newErrors: Record<string, string> = {};
+  const clearError = useCallback((field: string) => {
+    setErrors((prev) => {
+      if (!prev[field]) return prev;
+      const next = { ...prev };
+      delete next[field];
+      return next;
+    });
+  }, []);
 
-    if (!firstName.trim()) newErrors.firstName = "Required";
-    if (!lastName.trim()) newErrors.lastName = "Required";
-    if (!email.trim()) {
-      newErrors.email = "Required";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      newErrors.email = "Enter a valid email";
-    }
+  const handleSubmit = useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault();
+      const newErrors: Record<string, string> = {};
 
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      return;
-    }
+      if (!firstName.trim()) newErrors.firstName = "Required";
+      if (!lastName.trim()) newErrors.lastName = "Required";
+      if (!email.trim()) {
+        newErrors.email = "Required";
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        newErrors.email = "Enter a valid email";
+      }
 
-    setIsSubmitting(true);
-    // Simulate network delay for polish
-    setTimeout(() => {
-      onSubmit({
-        name: `${firstName.trim()} ${lastName.trim()}`,
-        email: email.trim(),
-      });
-    }, 600);
-  };
+      if (Object.keys(newErrors).length > 0) {
+        setErrors(newErrors);
+        return;
+      }
 
-  const clearError = (field: string) => {
-    if (errors[field]) {
-      setErrors((prev) => {
-        const next = { ...prev };
-        delete next[field];
-        return next;
-      });
-    }
-  };
+      setIsSubmitting(true);
+      setTimeout(() => {
+        onSubmit({
+          name: `${firstName.trim()} ${lastName.trim()}`,
+          email: email.trim(),
+        });
+      }, 600);
+    },
+    [firstName, lastName, email, onSubmit]
+  );
+
+  const toggleGuests = useCallback(() => setShowGuests(true), []);
+
+  const inputClass = (field: string) =>
+    `w-full rounded-xl border bg-white/60 px-4 py-3 text-[13.5px] text-lova-text placeholder:text-lova-text-muted/35 backdrop-blur-sm transition-colors focus:outline-none focus:ring-2 ${
+      errors[field]
+        ? "border-red-300 focus:border-red-400 focus:ring-red-100"
+        : "border-lova-border/60 focus:border-lova-pink/40 focus:ring-lova-pink/10"
+    }`;
 
   return (
     <form onSubmit={handleSubmit}>
-      {/* Back button */}
       <button
         type="button"
         onClick={onBack}
@@ -73,42 +82,55 @@ export function BookingForm({ onSubmit, onBack }: BookingFormProps) {
 
       <div className="space-y-4">
         <div className="grid grid-cols-2 gap-3">
-          <FormField
-            id="firstName"
-            label="First name"
-            required
-            value={firstName}
-            onChange={(v) => { setFirstName(v); clearError("firstName"); }}
-            placeholder="John"
-            error={errors.firstName}
-          />
-          <FormField
-            id="lastName"
-            label="Last name"
-            required
-            value={lastName}
-            onChange={(v) => { setLastName(v); clearError("lastName"); }}
-            placeholder="Doe"
-            error={errors.lastName}
-          />
+          <div>
+            <label htmlFor="firstName" className="mb-1.5 block text-[13px] font-medium text-lova-text">
+              First name<span className="ml-0.5 text-lova-pink">*</span>
+            </label>
+            <input
+              id="firstName"
+              type="text"
+              value={firstName}
+              onChange={(e) => { setFirstName(e.target.value); clearError("firstName"); }}
+              placeholder="John"
+              className={inputClass("firstName")}
+            />
+            {errors.firstName && <p className="mt-1 text-[11.5px] font-medium text-red-400">{errors.firstName}</p>}
+          </div>
+          <div>
+            <label htmlFor="lastName" className="mb-1.5 block text-[13px] font-medium text-lova-text">
+              Last name<span className="ml-0.5 text-lova-pink">*</span>
+            </label>
+            <input
+              id="lastName"
+              type="text"
+              value={lastName}
+              onChange={(e) => { setLastName(e.target.value); clearError("lastName"); }}
+              placeholder="Doe"
+              className={inputClass("lastName")}
+            />
+            {errors.lastName && <p className="mt-1 text-[11.5px] font-medium text-red-400">{errors.lastName}</p>}
+          </div>
         </div>
 
-        <FormField
-          id="email"
-          label="Email"
-          required
-          type="email"
-          value={email}
-          onChange={(v) => { setEmail(v); clearError("email"); }}
-          placeholder="john@company.com"
-          error={errors.email}
-        />
+        <div>
+          <label htmlFor="email" className="mb-1.5 block text-[13px] font-medium text-lova-text">
+            Email<span className="ml-0.5 text-lova-pink">*</span>
+          </label>
+          <input
+            id="email"
+            type="email"
+            value={email}
+            onChange={(e) => { setEmail(e.target.value); clearError("email"); }}
+            placeholder="john@company.com"
+            className={inputClass("email")}
+          />
+          {errors.email && <p className="mt-1 text-[11.5px] font-medium text-red-400">{errors.email}</p>}
+        </div>
 
-        {/* Add guests toggle */}
         {!showGuests ? (
           <button
             type="button"
-            onClick={() => setShowGuests(true)}
+            onClick={toggleGuests}
             className="group inline-flex items-center gap-1.5 text-[13px] font-medium text-lova-pink transition-colors hover:text-lova-pink-dark"
           >
             <UserPlus className="h-3.5 w-3.5" />
@@ -116,12 +138,16 @@ export function BookingForm({ onSubmit, onBack }: BookingFormProps) {
           </button>
         ) : (
           <div className="animate-fade-up">
-            <FormField
+            <label htmlFor="guests" className="mb-1.5 block text-[13px] font-medium text-lova-text">
+              Guest emails
+            </label>
+            <input
               id="guests"
-              label="Guest emails"
+              type="text"
               value={guestEmails}
-              onChange={setGuestEmails}
+              onChange={(e) => setGuestEmails(e.target.value)}
               placeholder="guest@company.com"
+              className={inputClass("guests")}
             />
             <p className="mt-1 text-[11px] text-lova-text-muted/60">
               Separate multiple emails with commas
@@ -129,12 +155,8 @@ export function BookingForm({ onSubmit, onBack }: BookingFormProps) {
           </div>
         )}
 
-        {/* Notes */}
         <div>
-          <label
-            htmlFor="notes"
-            className="mb-1.5 block text-[13px] font-medium text-lova-text"
-          >
+          <label htmlFor="notes" className="mb-1.5 block text-[13px] font-medium text-lova-text">
             Additional notes
           </label>
           <textarea
@@ -143,16 +165,15 @@ export function BookingForm({ onSubmit, onBack }: BookingFormProps) {
             onChange={(e) => setNotes(e.target.value)}
             placeholder="Anything you'd like to discuss..."
             rows={3}
-            className="w-full resize-none rounded-xl border border-lova-border/60 bg-white/60 px-4 py-3 text-[13.5px] text-lova-text placeholder:text-lova-text-muted/35 backdrop-blur-sm transition-all duration-200 focus:border-lova-pink/40 focus:outline-none focus:ring-2 focus:ring-lova-pink/10"
+            className="w-full resize-none rounded-xl border border-lova-border/60 bg-white/60 px-4 py-3 text-[13.5px] text-lova-text placeholder:text-lova-text-muted/35 backdrop-blur-sm transition-colors focus:border-lova-pink/40 focus:outline-none focus:ring-2 focus:ring-lova-pink/10"
           />
         </div>
       </div>
 
-      {/* Submit */}
       <button
         type="submit"
         disabled={isSubmitting}
-        className="group mt-6 flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-lova-pink to-lova-pink-light px-6 py-4 text-[14px] font-semibold text-white shadow-lg shadow-lova-pink/15 transition-all duration-300 hover:shadow-xl hover:shadow-lova-pink/25 hover:brightness-[1.03] disabled:opacity-70 disabled:cursor-not-allowed"
+        className="group mt-6 flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-lova-pink to-lova-pink-light px-6 py-4 text-[14px] font-semibold text-white shadow-lg shadow-lova-pink/15 transition-all hover:shadow-xl hover:shadow-lova-pink/25 hover:brightness-[1.03] disabled:opacity-70 disabled:cursor-not-allowed"
       >
         {isSubmitting ? (
           <div className="h-5 w-5 animate-spin rounded-full border-2 border-white/30 border-t-white" />
@@ -164,52 +185,5 @@ export function BookingForm({ onSubmit, onBack }: BookingFormProps) {
         )}
       </button>
     </form>
-  );
-}
-
-function FormField({
-  id,
-  label,
-  required,
-  type = "text",
-  value,
-  onChange,
-  placeholder,
-  error,
-}: {
-  id: string;
-  label: string;
-  required?: boolean;
-  type?: string;
-  value: string;
-  onChange: (v: string) => void;
-  placeholder: string;
-  error?: string;
-}) {
-  return (
-    <div>
-      <label
-        htmlFor={id}
-        className="mb-1.5 block text-[13px] font-medium text-lova-text"
-      >
-        {label}
-        {required && <span className="ml-0.5 text-lova-pink">*</span>}
-      </label>
-      <input
-        id={id}
-        type={type}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        placeholder={placeholder}
-        className={`w-full rounded-xl border bg-white/60 px-4 py-3 text-[13.5px] text-lova-text placeholder:text-lova-text-muted/35 backdrop-blur-sm transition-all duration-200 focus:outline-none focus:ring-2 ${
-          error
-            ? "border-red-300 focus:border-red-400 focus:ring-red-100"
-            : "border-lova-border/60 focus:border-lova-pink/40 focus:ring-lova-pink/10"
-        }`}
-      />
-      {error && (
-        <p className="mt-1 text-[11.5px] font-medium text-red-400">{error}</p>
-      )}
-    </div>
   );
 }

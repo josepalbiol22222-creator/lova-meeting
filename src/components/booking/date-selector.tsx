@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface DateSelectorProps {
@@ -8,11 +8,13 @@ interface DateSelectorProps {
   onSelect: (date: Date) => void;
 }
 
-const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"] as const;
 const MONTHS = [
   "January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December",
-];
+] as const;
+
+const DENSITY_MAP = [0.8, 0.6, 0.9, 0.3, 0.7, 0, 0, 0.5, 0.8, 0.4, 0.9, 0.6, 0.3, 0, 0, 0.7, 0.5, 0.8, 0.4, 0.9, 0, 0, 0.6, 0.3, 0.8, 0.7, 0.5, 0, 0, 0.4, 0.9] as const;
 
 function getDaysInMonth(year: number, month: number) {
   return new Date(year, month + 1, 0).getDate();
@@ -31,44 +33,60 @@ function isSameDay(a: Date, b: Date) {
   );
 }
 
-function isWeekend(year: number, month: number, day: number) {
-  const d = new Date(year, month, day).getDay();
-  return d === 0 || d === 6;
-}
-
-// Simulated slot availability (0-1 density) for visual indicator
-function getAvailabilityDensity(day: number): number {
-  const densities = [0.8, 0.6, 0.9, 0.3, 0.7, 0, 0, 0.5, 0.8, 0.4, 0.9, 0.6, 0.3, 0, 0, 0.7, 0.5, 0.8, 0.4, 0.9, 0, 0, 0.6, 0.3, 0.8, 0.7, 0.5, 0, 0, 0.4, 0.9];
-  return densities[(day - 1) % densities.length];
-}
-
 export function DateSelector({ selected, onSelect }: DateSelectorProps) {
-  const today = new Date();
+  const today = useMemo(() => new Date(), []);
+  const todayStart = useMemo(
+    () => new Date(today.getFullYear(), today.getMonth(), today.getDate()),
+    [today]
+  );
   const [viewMonth, setViewMonth] = useState(today.getMonth());
   const [viewYear, setViewYear] = useState(today.getFullYear());
 
-  const daysInMonth = getDaysInMonth(viewYear, viewMonth);
-  const firstDay = getFirstDayOfMonth(viewYear, viewMonth);
+  const { daysInMonth, firstDay } = useMemo(
+    () => ({
+      daysInMonth: getDaysInMonth(viewYear, viewMonth),
+      firstDay: getFirstDayOfMonth(viewYear, viewMonth),
+    }),
+    [viewYear, viewMonth]
+  );
 
-  const prevMonth = () => {
-    if (viewMonth === 0) { setViewMonth(11); setViewYear(viewYear - 1); }
-    else setViewMonth(viewMonth - 1);
-  };
+  const prevMonth = useCallback(() => {
+    setViewMonth((m) => {
+      if (m === 0) { setViewYear((y) => y - 1); return 11; }
+      return m - 1;
+    });
+  }, []);
 
-  const nextMonth = () => {
-    if (viewMonth === 11) { setViewMonth(0); setViewYear(viewYear + 1); }
-    else setViewMonth(viewMonth + 1);
-  };
-
-  const isPast = (day: number) => {
-    const date = new Date(viewYear, viewMonth, day);
-    const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-    return date < todayStart;
-  };
+  const nextMonth = useCallback(() => {
+    setViewMonth((m) => {
+      if (m === 11) { setViewYear((y) => y + 1); return 0; }
+      return m + 1;
+    });
+  }, []);
 
   const canGoPrev =
     viewYear > today.getFullYear() ||
     (viewYear === today.getFullYear() && viewMonth > today.getMonth());
+
+  const timezone = useMemo(
+    () => Intl.DateTimeFormat().resolvedOptions().timeZone.replace(/_/g, " "),
+    []
+  );
+
+  // Pre-compute day metadata to avoid per-render object creation
+  const daysMeta = useMemo(() => {
+    return Array.from({ length: daysInMonth }, (_, i) => {
+      const day = i + 1;
+      const date = new Date(viewYear, viewMonth, day);
+      const dayOfWeek = date.getDay();
+      const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+      const isPast = date < todayStart;
+      const disabled = isPast || isWeekend;
+      const isToday = isSameDay(date, today);
+      const density = disabled ? 0 : DENSITY_MAP[(day - 1) % DENSITY_MAP.length];
+      return { day, date, disabled, isToday, density };
+    });
+  }, [viewYear, viewMonth, todayStart, today, daysInMonth]);
 
   return (
     <div>
@@ -81,13 +99,13 @@ export function DateSelector({ selected, onSelect }: DateSelectorProps) {
           <button
             onClick={prevMonth}
             disabled={!canGoPrev}
-            className="group flex h-8 w-8 items-center justify-center rounded-xl transition-all hover:bg-lova-pink-50 disabled:opacity-20 disabled:hover:bg-transparent"
+            className="group flex h-8 w-8 items-center justify-center rounded-xl transition-colors hover:bg-lova-pink-50 disabled:opacity-20 disabled:hover:bg-transparent"
           >
             <ChevronLeft className="h-4 w-4 text-lova-text-muted group-hover:text-lova-pink" />
           </button>
           <button
             onClick={nextMonth}
-            className="group flex h-8 w-8 items-center justify-center rounded-xl transition-all hover:bg-lova-pink-50"
+            className="group flex h-8 w-8 items-center justify-center rounded-xl transition-colors hover:bg-lova-pink-50"
           >
             <ChevronRight className="h-4 w-4 text-lova-text-muted group-hover:text-lova-pink" />
           </button>
@@ -108,42 +126,27 @@ export function DateSelector({ selected, onSelect }: DateSelectorProps) {
 
       {/* Day grid */}
       <div className="grid grid-cols-7 gap-0.5">
-        {Array.from({ length: firstDay }).map((_, i) => (
-          <div key={`empty-${i}`} className="h-10" />
+        {Array.from({ length: firstDay }, (_, i) => (
+          <div key={`e-${i}`} className="h-10" />
         ))}
 
-        {Array.from({ length: daysInMonth }).map((_, i) => {
-          const day = i + 1;
-          const date = new Date(viewYear, viewMonth, day);
-          const isToday = isSameDay(date, today);
+        {daysMeta.map(({ day, date, disabled, isToday, density }) => {
           const isSelected = selected ? isSameDay(date, selected) : false;
-          const weekend = isWeekend(viewYear, viewMonth, day);
-          const past = isPast(day);
-          const disabled = past || weekend;
-          const density = disabled ? 0 : getAvailabilityDensity(day);
 
           return (
             <button
               key={day}
               disabled={disabled}
               onClick={() => onSelect(date)}
-              className="group relative flex h-10 items-center justify-center rounded-[12px] transition-all duration-200"
-              style={{
-                background: isSelected
-                  ? "linear-gradient(135deg, #d14d72, #e8749a)"
-                  : undefined,
-                boxShadow: isSelected
-                  ? "0 4px 12px rgba(209, 77, 114, 0.25), 0 1px 3px rgba(209, 77, 114, 0.15)"
-                  : undefined,
-              }}
+              className={`group relative flex h-10 items-center justify-center rounded-[12px] transition-colors ${
+                isSelected ? "date-selected" : ""
+              }`}
             >
-              {/* Availability dot indicator */}
+              {/* Availability dot */}
               {!disabled && !isSelected && density > 0 && (
                 <span
-                  className="absolute bottom-1 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full transition-all group-hover:scale-150"
-                  style={{
-                    backgroundColor: `rgba(209, 77, 114, ${0.2 + density * 0.4})`,
-                  }}
+                  className="absolute bottom-1 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-lova-pink transition-transform group-hover:scale-150"
+                  style={{ opacity: 0.2 + density * 0.4 }}
                 />
               )}
 
@@ -153,7 +156,7 @@ export function DateSelector({ selected, onSelect }: DateSelectorProps) {
               )}
 
               <span
-                className={`relative z-10 text-[13px] font-medium transition-all ${
+                className={`relative z-10 text-[13px] font-medium transition-colors ${
                   isSelected
                     ? "text-white font-semibold"
                     : isToday
@@ -166,7 +169,7 @@ export function DateSelector({ selected, onSelect }: DateSelectorProps) {
                 {day}
               </span>
 
-              {/* Hover background */}
+              {/* Hover bg */}
               {!disabled && !isSelected && (
                 <span className="absolute inset-0.5 rounded-[10px] bg-lova-pink-50 opacity-0 transition-opacity group-hover:opacity-100" />
               )}
@@ -175,11 +178,11 @@ export function DateSelector({ selected, onSelect }: DateSelectorProps) {
         })}
       </div>
 
-      {/* Timezone indicator */}
+      {/* Timezone */}
       <div className="mt-4 flex items-center gap-1.5">
         <div className="h-1 w-1 rounded-full bg-lova-pink/40" />
         <span className="text-[11px] tracking-wide text-lova-text-muted/50">
-          {Intl.DateTimeFormat().resolvedOptions().timeZone.replace(/_/g, " ")}
+          {timezone}
         </span>
       </div>
     </div>
