@@ -190,12 +190,8 @@ export function BookingWidget({
 
 function WidgetShell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="relative">
-      {/* Radical accent line — stronger */}
-      <div className="absolute left-6 right-6 top-0 z-10 h-[2.5px] rounded-full bg-gradient-to-r from-radical/0 via-radical/50 to-radical/0" />
-      <div className="overflow-hidden rounded-[22px] border border-navy-10/60 bg-white shadow-[0_1px_3px_rgba(26,26,49,0.06),0_8px_32px_rgba(26,26,49,0.05)] backdrop-blur-xl">
-        {children}
-      </div>
+    <div className="overflow-hidden rounded-[22px] border border-navy-10/60 bg-white shadow-[0_1px_3px_rgba(26,26,49,0.06),0_8px_32px_rgba(26,26,49,0.05)]">
+      {children}
     </div>
   );
 }
