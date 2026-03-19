@@ -1,4 +1,4 @@
-// Server component — pure static decoration
+// Server component — matches presentation_en.html background style
 
 export function BackgroundOrbs() {
   return (
@@ -7,81 +7,37 @@ export function BackgroundOrbs() {
       style={{ contain: "strict" }}
       aria-hidden="true"
     >
-      {/* Factorial neutral base */}
-      <div className="absolute inset-0 bg-gradient-to-br from-navy-2 via-[#F7F7F8] to-[#F0F4F5]" />
-
-      {/* Subtle noise */}
+      {/* Warm base gradient — from presentation */}
       <div
-        className="absolute inset-0 opacity-[0.025]"
+        className="absolute inset-0"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+          background: `linear-gradient(135deg, #FAF9F7 0%, #FFF8F0 50%, #fff 100%)`,
         }}
       />
 
-      {/* Frobel geometric grid (Factorial brand element) */}
+      {/* Radial gradient orbs — exact from presentation_en.html */}
       <div
-        className="absolute inset-0 opacity-[0.015]"
+        className="absolute inset-0"
+        style={{
+          background: `
+            radial-gradient(80% 60% at 70% 20%, rgba(209,77,114,0.08) 0%, transparent 50%),
+            radial-gradient(60% 50% at 20% 80%, rgba(232,116,154,0.06) 0%, transparent 50%),
+            radial-gradient(50% 40% at 50% 50%, rgba(232,224,255,0.05) 0%, transparent 50%)
+          `,
+        }}
+      />
+
+      {/* Grid pattern — 40px from presentation */}
+      <div
+        className="absolute inset-0"
         style={{
           backgroundImage: `
-            radial-gradient(circle at 1px 1px, rgba(26,26,49,0.4) 1px, transparent 0)
+            linear-gradient(rgba(209,77,114,0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(209,77,114,0.03) 1px, transparent 1px)
           `,
-          backgroundSize: "48px 48px",
+          backgroundSize: "40px 40px",
         }}
       />
-
-      {/* Radical red orb — top right */}
-      <div
-        className="absolute rounded-full blur-[120px] animate-float-orb"
-        style={{
-          width: "450px",
-          height: "450px",
-          top: "5%",
-          right: "8%",
-          background: "radial-gradient(circle, rgba(255,53,94,0.08) 0%, rgba(255,53,94,0.02) 45%, transparent 70%)",
-        }}
-      />
-
-      {/* Viridian orb — bottom left */}
-      <div
-        className="absolute rounded-full blur-[100px] animate-float-orb-slow"
-        style={{
-          width: "400px",
-          height: "400px",
-          bottom: "10%",
-          left: "5%",
-          background: "radial-gradient(circle, rgba(7,162,173,0.07) 0%, rgba(7,162,173,0.02) 45%, transparent 70%)",
-        }}
-      />
-
-      {/* Gold/warm orb — center (Factorial One) */}
-      <div
-        className="absolute rounded-full blur-[90px] animate-float-orb"
-        style={{
-          width: "300px",
-          height: "300px",
-          top: "45%",
-          left: "50%",
-          transform: "translateX(-50%)",
-          background: "radial-gradient(circle, rgba(249,214,155,0.08) 0%, transparent 60%)",
-          animationDelay: "5s",
-        }}
-      />
-
-      {/* Lavender orb — subtle */}
-      <div
-        className="absolute rounded-full blur-[60px] animate-float-orb-slow"
-        style={{
-          width: "180px",
-          height: "180px",
-          top: "15%",
-          left: "20%",
-          background: "radial-gradient(circle, rgba(210,217,249,0.1) 0%, transparent 60%)",
-          animationDelay: "10s",
-        }}
-      />
-
-      {/* Vignette */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_50%,rgba(244,244,245,0.6)_100%)]" />
     </div>
   );
 }
