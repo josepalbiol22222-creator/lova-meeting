@@ -20,8 +20,8 @@ export default function Home() {
         />
 
         {/* Powered by Lova */}
-        <p className="mt-7 text-[11px] text-navy-20">
-          Powered by <span className="font-semibold text-navy-40">Lova</span>
+        <p className="mt-7 text-[13px] text-navy-20">
+          Powered by <span className="font-heading font-bold text-navy-60">Lova</span>
         </p>
       </div>
     </>
