@@ -1,14 +1,14 @@
 "use client";
 
 import { useState, useMemo, useCallback } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Globe } from "lucide-react";
 
 interface DateSelectorProps {
   selected: Date | null;
   onSelect: (date: Date) => void;
 }
 
-const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"] as const;
+const DAYS = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"] as const;
 const MONTHS = [
   "January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December",
@@ -26,62 +26,38 @@ function getFirstDayOfMonth(year: number, month: number) {
 }
 
 function isSameDay(a: Date, b: Date) {
-  return (
-    a.getDate() === b.getDate() &&
-    a.getMonth() === b.getMonth() &&
-    a.getFullYear() === b.getFullYear()
-  );
+  return a.getDate() === b.getDate() && a.getMonth() === b.getMonth() && a.getFullYear() === b.getFullYear();
 }
 
 export function DateSelector({ selected, onSelect }: DateSelectorProps) {
   const today = useMemo(() => new Date(), []);
-  const todayStart = useMemo(
-    () => new Date(today.getFullYear(), today.getMonth(), today.getDate()),
-    [today]
-  );
+  const todayStart = useMemo(() => new Date(today.getFullYear(), today.getMonth(), today.getDate()), [today]);
   const [viewMonth, setViewMonth] = useState(today.getMonth());
   const [viewYear, setViewYear] = useState(today.getFullYear());
 
-  const { daysInMonth, firstDay } = useMemo(
-    () => ({
-      daysInMonth: getDaysInMonth(viewYear, viewMonth),
-      firstDay: getFirstDayOfMonth(viewYear, viewMonth),
-    }),
-    [viewYear, viewMonth]
-  );
+  const { daysInMonth, firstDay } = useMemo(() => ({
+    daysInMonth: getDaysInMonth(viewYear, viewMonth),
+    firstDay: getFirstDayOfMonth(viewYear, viewMonth),
+  }), [viewYear, viewMonth]);
 
   const prevMonth = useCallback(() => {
-    setViewMonth((m) => {
-      if (m === 0) { setViewYear((y) => y - 1); return 11; }
-      return m - 1;
-    });
+    setViewMonth((m) => { if (m === 0) { setViewYear((y) => y - 1); return 11; } return m - 1; });
   }, []);
 
   const nextMonth = useCallback(() => {
-    setViewMonth((m) => {
-      if (m === 11) { setViewYear((y) => y + 1); return 0; }
-      return m + 1;
-    });
+    setViewMonth((m) => { if (m === 11) { setViewYear((y) => y + 1); return 0; } return m + 1; });
   }, []);
 
-  const canGoPrev =
-    viewYear > today.getFullYear() ||
-    (viewYear === today.getFullYear() && viewMonth > today.getMonth());
+  const canGoPrev = viewYear > today.getFullYear() || (viewYear === today.getFullYear() && viewMonth > today.getMonth());
 
-  const timezone = useMemo(
-    () => Intl.DateTimeFormat().resolvedOptions().timeZone.replace(/_/g, " "),
-    []
-  );
+  const timezone = useMemo(() => Intl.DateTimeFormat().resolvedOptions().timeZone.replace(/_/g, " "), []);
 
-  // Pre-compute day metadata to avoid per-render object creation
   const daysMeta = useMemo(() => {
     return Array.from({ length: daysInMonth }, (_, i) => {
       const day = i + 1;
       const date = new Date(viewYear, viewMonth, day);
-      const dayOfWeek = date.getDay();
-      const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
-      const isPast = date < todayStart;
-      const disabled = isPast || isWeekend;
+      const dow = date.getDay();
+      const disabled = date < todayStart || dow === 0 || dow === 6;
       const isToday = isSameDay(date, today);
       const density = disabled ? 0 : DENSITY_MAP[(day - 1) % DENSITY_MAP.length];
       return { day, date, disabled, isToday, density };
@@ -90,44 +66,44 @@ export function DateSelector({ selected, onSelect }: DateSelectorProps) {
 
   return (
     <div>
-      {/* Month navigation */}
-      <div className="mb-5 flex items-center justify-between">
-        <h3 className="font-heading text-[17px] font-bold text-lova-text">
-          {MONTHS[viewMonth]} {viewYear}
-        </h3>
-        <div className="flex gap-1">
+      {/* Month nav */}
+      <div className="mb-4 flex items-center justify-between">
+        <div>
+          <h3 className="font-heading text-[18px] font-bold tracking-[-0.01em] text-lova-text">
+            {MONTHS[viewMonth]}
+          </h3>
+          <p className="text-[11px] font-medium text-lova-text-muted/50">{viewYear}</p>
+        </div>
+        <div className="flex gap-0.5">
           <button
             onClick={prevMonth}
             disabled={!canGoPrev}
-            className="group flex h-8 w-8 items-center justify-center rounded-xl transition-colors hover:bg-lova-pink-50 disabled:opacity-20 disabled:hover:bg-transparent"
+            className="flex h-8 w-8 items-center justify-center rounded-full text-lova-text-muted transition-all hover:bg-lova-pink-50 hover:text-lova-pink disabled:opacity-15"
           >
-            <ChevronLeft className="h-4 w-4 text-lova-text-muted group-hover:text-lova-pink" />
+            <ChevronLeft className="h-4 w-4" />
           </button>
           <button
             onClick={nextMonth}
-            className="group flex h-8 w-8 items-center justify-center rounded-xl transition-colors hover:bg-lova-pink-50"
+            className="flex h-8 w-8 items-center justify-center rounded-full text-lova-text-muted transition-all hover:bg-lova-pink-50 hover:text-lova-pink"
           >
-            <ChevronRight className="h-4 w-4 text-lova-text-muted group-hover:text-lova-pink" />
+            <ChevronRight className="h-4 w-4" />
           </button>
         </div>
       </div>
 
       {/* Day headers */}
-      <div className="mb-1.5 grid grid-cols-7 gap-0.5">
+      <div className="mb-1 grid grid-cols-7">
         {DAYS.map((day) => (
-          <div
-            key={day}
-            className="pb-2 text-center text-[11px] font-semibold tracking-wider text-lova-text-muted/60 uppercase"
-          >
+          <div key={day} className="flex h-8 items-center justify-center text-[10.5px] font-semibold tracking-wider text-lova-text-muted/40 uppercase">
             {day}
           </div>
         ))}
       </div>
 
       {/* Day grid */}
-      <div className="grid grid-cols-7 gap-0.5">
+      <div className="grid grid-cols-7">
         {Array.from({ length: firstDay }, (_, i) => (
-          <div key={`e-${i}`} className="h-10" />
+          <div key={`e-${i}`} className="h-11" />
         ))}
 
         {daysMeta.map(({ day, date, disabled, isToday, density }) => {
@@ -138,40 +114,38 @@ export function DateSelector({ selected, onSelect }: DateSelectorProps) {
               key={day}
               disabled={disabled}
               onClick={() => onSelect(date)}
-              className={`group relative flex h-10 items-center justify-center rounded-[12px] transition-colors ${
+              className={`group relative flex h-11 items-center justify-center rounded-[13px] transition-all duration-150 ${
                 isSelected ? "date-selected" : ""
               }`}
             >
+              {/* Today underline */}
+              {isToday && !isSelected && (
+                <span className="absolute bottom-1.5 left-1/2 h-[2px] w-4 -translate-x-1/2 rounded-full bg-lova-pink/40" />
+              )}
+
               {/* Availability dot */}
-              {!disabled && !isSelected && density > 0 && (
+              {!disabled && !isSelected && !isToday && density > 0 && (
                 <span
-                  className="absolute bottom-1 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-lova-pink transition-transform group-hover:scale-150"
-                  style={{ opacity: 0.2 + density * 0.4 }}
+                  className="absolute bottom-1.5 left-1/2 h-[3px] w-[3px] -translate-x-1/2 rounded-full bg-lova-pink transition-transform group-hover:scale-[1.8]"
+                  style={{ opacity: 0.15 + density * 0.35 }}
                 />
               )}
 
-              {/* Today ring */}
-              {isToday && !isSelected && (
-                <span className="absolute inset-0.5 rounded-[10px] border-2 border-lova-pink/25" />
-              )}
-
-              <span
-                className={`relative z-10 text-[13px] font-medium transition-colors ${
-                  isSelected
-                    ? "text-white font-semibold"
-                    : isToday
-                      ? "text-lova-pink font-semibold"
-                      : disabled
-                        ? "text-lova-text-muted/20"
-                        : "text-lova-text group-hover:text-lova-pink group-hover:font-semibold"
-                }`}
-              >
+              <span className={`relative z-10 text-[13px] transition-all ${
+                isSelected
+                  ? "font-bold text-white"
+                  : isToday
+                    ? "font-bold text-lova-pink"
+                    : disabled
+                      ? "text-lova-text-muted/15"
+                      : "font-medium text-lova-text group-hover:text-lova-pink"
+              }`}>
                 {day}
               </span>
 
               {/* Hover bg */}
               {!disabled && !isSelected && (
-                <span className="absolute inset-0.5 rounded-[10px] bg-lova-pink-50 opacity-0 transition-opacity group-hover:opacity-100" />
+                <span className="absolute inset-1 rounded-[10px] bg-lova-pink-50/80 opacity-0 transition-opacity group-hover:opacity-100" />
               )}
             </button>
           );
@@ -179,11 +153,9 @@ export function DateSelector({ selected, onSelect }: DateSelectorProps) {
       </div>
 
       {/* Timezone */}
-      <div className="mt-4 flex items-center gap-1.5">
-        <div className="h-1 w-1 rounded-full bg-lova-pink/40" />
-        <span className="text-[11px] tracking-wide text-lova-text-muted/50">
-          {timezone}
-        </span>
+      <div className="mt-3 flex items-center gap-1.5">
+        <Globe className="h-3 w-3 text-lova-text-muted/30" />
+        <span className="text-[10.5px] text-lova-text-muted/40">{timezone}</span>
       </div>
     </div>
   );

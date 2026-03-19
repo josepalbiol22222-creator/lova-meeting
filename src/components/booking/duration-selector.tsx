@@ -12,18 +12,18 @@ export function DurationSelector({
   onChange,
 }: DurationSelectorProps) {
   return (
-    <div className="flex gap-1.5">
+    <div className="inline-flex rounded-xl bg-lova-pink-50/50 p-1">
       {durations.map((d) => (
         <button
           key={d}
           onClick={() => onChange(d)}
-          className={`rounded-xl px-3.5 py-2 text-[12.5px] font-semibold transition-all duration-250 ${
+          className={`relative rounded-[10px] px-4 py-[7px] text-[12px] font-semibold tracking-wide transition-all duration-250 ${
             selected === d
-              ? "bg-gradient-to-r from-lova-pink to-lova-pink-light text-white shadow-md shadow-lova-pink/20"
-              : "bg-lova-pink-50/60 text-lova-text-muted hover:bg-lova-pink-50 hover:text-lova-pink"
+              ? "bg-white text-lova-pink shadow-sm"
+              : "text-lova-text-muted/60 hover:text-lova-text-muted"
           }`}
         >
-          {d} min
+          {d}m
         </button>
       ))}
     </div>

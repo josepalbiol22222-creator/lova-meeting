@@ -65,12 +65,12 @@ export function BookingWidget({
     setBookedDetails(null);
   }, []);
 
-  // Confirmation view
+  // Confirmation view — separate card
   if (step === "confirmed" && bookedDetails && selectedDate) {
     return (
-      <div className="w-full max-w-lg animate-scale-in">
-        <div className="overflow-hidden rounded-[28px] border border-lova-border/60 bg-white/95 shadow-2xl shadow-lova-pink/[0.04] backdrop-blur-xl">
-          <div className="p-10">
+      <div className="w-full max-w-[480px] animate-scale-in">
+        <WidgetShell>
+          <div className="p-10 sm:p-12">
             <Confirmation
               name={bookedDetails.name}
               email={bookedDetails.email}
@@ -81,108 +81,114 @@ export function BookingWidget({
               onBookAnother={handleReset}
             />
           </div>
-        </div>
+        </WidgetShell>
       </div>
     );
   }
 
   return (
-    <div className="w-full max-w-[860px] animate-fade-up">
-      <div className="overflow-hidden rounded-[28px] border border-lova-border/60 bg-white/95 shadow-2xl shadow-lova-pink/[0.04] backdrop-blur-xl">
+    <div className="w-full max-w-[880px] animate-fade-up">
+      <WidgetShell>
         <div className="flex flex-col lg:flex-row">
-          {/* ═══ Left panel - Meeting info ═══ */}
-          <div className="relative border-b border-lova-border/40 bg-gradient-to-b from-white/80 to-lova-cream/30 p-8 lg:w-[280px] lg:shrink-0 lg:border-b-0 lg:border-r lg:p-9">
-            {/* Decorative corner accent */}
-            <div className="absolute right-0 top-0 h-24 w-24 bg-gradient-to-bl from-lova-pink-50 to-transparent opacity-60 lg:rounded-bl-full" />
+          {/* ═══ Left panel ═══ */}
+          <div className="relative overflow-hidden border-b border-lova-border/30 lg:w-[290px] lg:shrink-0 lg:border-b-0 lg:border-r">
+            {/* Gradient bg */}
+            <div className="absolute inset-0 bg-gradient-to-b from-lova-pink-50/80 via-white/40 to-white/0" />
+            {/* Decorative arc */}
+            <div className="absolute -right-20 -top-20 h-40 w-40 rounded-full bg-gradient-to-br from-lova-pink/[0.07] to-transparent" />
 
-            {/* Avatar */}
-            <div className="relative mb-5">
-              <div className="flex h-[72px] w-[72px] items-center justify-center rounded-2xl bg-gradient-to-br from-lova-pink to-lova-pink-light shadow-lg shadow-lova-pink/15">
-                {organizer.avatar ? (
-                  <img
-                    src={organizer.avatar}
-                    alt={organizer.name}
-                    className="h-full w-full rounded-2xl object-cover"
-                  />
-                ) : (
-                  <span className="font-heading text-[22px] font-bold text-white">
-                    {organizer.name
-                      .split(" ")
-                      .map((n) => n[0])
-                      .join("")}
-                  </span>
-                )}
-              </div>
-            </div>
-
-            <p className="text-[13px] font-medium tracking-wide text-lova-text-muted uppercase">
-              {organizer.name}
-            </p>
-            <h1 className="mt-1 font-heading text-[22px] font-bold leading-tight text-lova-text">
-              {meetingTitle}
-            </h1>
-
-            {meetingDescription && (
-              <p className="mt-3 text-[13.5px] leading-relaxed text-lova-text-muted">
-                {meetingDescription}
-              </p>
-            )}
-
-            {/* Meeting meta */}
-            <div className="mt-6 space-y-2.5">
-              <MetaItem icon={Clock} text={`${selectedDuration} min`} />
-              <MetaItem icon={Video} text="Google Meet" />
-              <MetaItem icon={Globe} text={timezone.replace(/_/g, " ")} />
-            </div>
-
-            {/* Duration pills */}
-            {durations.length > 1 && step === "select" && (
-              <div className="mt-6 pt-5 border-t border-lova-border/40">
-                <p className="mb-2.5 text-[11px] font-semibold tracking-widest text-lova-text-muted/70 uppercase">
-                  Duration
-                </p>
-                <DurationSelector
-                  durations={durations}
-                  selected={selectedDuration}
-                  onChange={setSelectedDuration}
-                />
-              </div>
-            )}
-
-            {/* Selected slot summary (form step) */}
-            {step === "form" && selectedDate && selectedTime && (
-              <div className="mt-6 animate-fade-up">
-                <div className="rounded-2xl bg-lova-pink-50 p-4">
-                  <p className="text-sm font-semibold text-lova-text">
-                    {selectedDate.toLocaleDateString("en-US", {
-                      weekday: "long",
-                      month: "short",
-                      day: "numeric",
-                    })}
-                  </p>
-                  <p className="mt-0.5 text-[13px] text-lova-pink">
-                    {formatTime(selectedTime)} – {formatEndTime(selectedTime, selectedDuration)}
-                  </p>
+            <div className="relative p-8 lg:p-9">
+              {/* Avatar */}
+              <div className="mb-6 inline-flex">
+                <div className="relative">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-[18px] bg-gradient-to-br from-lova-pink to-lova-pink-light shadow-lg shadow-lova-pink/20 ring-[3px] ring-white">
+                    {organizer.avatar ? (
+                      <img
+                        src={organizer.avatar}
+                        alt={organizer.name}
+                        className="h-full w-full rounded-[18px] object-cover"
+                      />
+                    ) : (
+                      <span className="font-heading text-lg font-bold text-white tracking-wide">
+                        {organizer.name.split(" ").map((n) => n[0]).join("")}
+                      </span>
+                    )}
+                  </div>
+                  {/* Online indicator */}
+                  <div className="absolute -bottom-0.5 -right-0.5 h-4 w-4 rounded-full border-[2.5px] border-white bg-emerald-400" />
                 </div>
               </div>
-            )}
+
+              {/* Name & title */}
+              <p className="text-[13px] font-medium text-lova-text-muted">
+                {organizer.name}
+              </p>
+              <h1 className="mt-0.5 font-heading text-[23px] font-extrabold leading-[1.2] tracking-[-0.01em] text-lova-text">
+                {meetingTitle}
+              </h1>
+
+              {meetingDescription && (
+                <p className="mt-3 text-[13px] leading-[1.6] text-lova-text-muted/80">
+                  {meetingDescription}
+                </p>
+              )}
+
+              {/* Divider */}
+              <div className="my-5 h-px bg-gradient-to-r from-lova-border/60 via-lova-border/30 to-transparent" />
+
+              {/* Meta — compact horizontal chips */}
+              <div className="flex flex-wrap gap-2">
+                <MetaChip icon={Clock} text={`${selectedDuration}m`} />
+                <MetaChip icon={Video} text="Google Meet" />
+                <MetaChip icon={Globe} text={timezone.split("/").pop()?.replace(/_/g, " ") || timezone} />
+              </div>
+
+              {/* Duration selector */}
+              {durations.length > 1 && step === "select" && (
+                <div className="mt-5">
+                  <DurationSelector
+                    durations={durations}
+                    selected={selectedDuration}
+                    onChange={setSelectedDuration}
+                  />
+                </div>
+              )}
+
+              {/* Selected slot summary (form step) */}
+              {step === "form" && selectedDate && selectedTime && (
+                <div className="mt-5 animate-fade-up">
+                  <div className="rounded-2xl border border-lova-pink/15 bg-gradient-to-br from-lova-pink-50 to-white p-4">
+                    <p className="text-[13.5px] font-semibold text-lova-text">
+                      {selectedDate.toLocaleDateString("en-US", {
+                        weekday: "long",
+                        month: "short",
+                        day: "numeric",
+                      })}
+                    </p>
+                    <p className="mt-0.5 text-[12.5px] font-medium text-lova-pink">
+                      {formatTime(selectedTime)} – {formatEndTime(selectedTime, selectedDuration)}
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
 
-          {/* ═══ Right panel - Interactive area ═══ */}
+          {/* ═══ Right panel ═══ */}
           <div className="flex-1 p-8 lg:p-9">
             {step === "select" && (
               <div className="flex flex-col gap-6 sm:flex-row sm:gap-0">
                 {/* Calendar */}
-                <div className={`transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${selectedDate ? "sm:w-[55%] sm:pr-6 sm:border-r sm:border-lova-border/30" : "w-full"}`}>
+                <div className={`transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${selectedDate ? "sm:w-[54%] sm:pr-7 sm:border-r sm:border-lova-border/25" : "w-full"}`}>
                   <DateSelector
                     selected={selectedDate}
                     onSelect={setSelectedDate}
                   />
                 </div>
 
-                {/* Time slots - slides in when date selected */}
+                {/* Time slots */}
                 {selectedDate && (
-                  <div className="animate-slide-right sm:w-[45%] sm:pl-6">
+                  <div className="animate-slide-right sm:w-[46%] sm:pl-7">
                     <TimeSelector
                       date={selectedDate}
                       duration={selectedDuration}
@@ -203,18 +209,31 @@ export function BookingWidget({
             )}
           </div>
         </div>
+      </WidgetShell>
+    </div>
+  );
+}
+
+/* ═══ Sub-components ═══ */
+
+function WidgetShell({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="relative">
+      {/* Pink accent line at top */}
+      <div className="absolute left-8 right-8 top-0 z-10 h-[2.5px] rounded-full bg-gradient-to-r from-transparent via-lova-pink to-transparent opacity-40" />
+      {/* Card */}
+      <div className="overflow-hidden rounded-[26px] border border-lova-border/40 bg-white/[0.97] shadow-[0_1px_2px_rgba(0,0,0,0.04),0_4px_16px_rgba(0,0,0,0.04),0_12px_40px_rgba(209,77,114,0.04)] backdrop-blur-xl">
+        {children}
       </div>
     </div>
   );
 }
 
-function MetaItem({ icon: Icon, text }: { icon: typeof Clock; text: string }) {
+function MetaChip({ icon: Icon, text }: { icon: typeof Clock; text: string }) {
   return (
-    <div className="flex items-center gap-2.5">
-      <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-lova-pink-50">
-        <Icon className="h-3.5 w-3.5 text-lova-pink" />
-      </div>
-      <span className="text-[13px] text-lova-text-muted">{text}</span>
+    <div className="inline-flex items-center gap-1.5 rounded-lg bg-lova-pink-50/70 px-2.5 py-1.5">
+      <Icon className="h-3 w-3 text-lova-pink/70" />
+      <span className="text-[11.5px] font-medium text-lova-text-muted">{text}</span>
     </div>
   );
 }

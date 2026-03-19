@@ -14,17 +14,19 @@ export default function Home() {
             company: "Lova",
           }}
           meetingTitle="30 Minute Meeting"
-          meetingDescription="Book a time to chat. I'll share how Lova can help your team be more productive."
+          meetingDescription="Book a time to chat — I'll share how Lova can help your team be more productive."
           durations={[15, 30, 60]}
           defaultDuration={30}
         />
 
         {/* Powered by */}
-        <div className="mt-8 flex items-center gap-1.5 text-[11px] tracking-wide text-lova-text-muted/40">
-          <span>Powered by</span>
-          <span className="font-heading font-bold text-lova-text-muted/50">
+        <div className="mt-8 flex items-center gap-2 text-[11px] text-lova-text-muted/35">
+          <div className="h-px w-6 bg-lova-text-muted/15" />
+          <span className="tracking-widest uppercase">Powered by</span>
+          <span className="font-heading font-bold tracking-wide text-lova-text-muted/50">
             Lova
           </span>
+          <div className="h-px w-6 bg-lova-text-muted/15" />
         </div>
       </div>
     </>
