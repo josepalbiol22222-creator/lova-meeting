@@ -10,20 +10,30 @@
   --font-sans: var(--font-sans);
   --font-heading: var(--font-heading);
 
-  /* Lova brand palette */
-  --color-lova-pink: #d14d72;
-  --color-lova-pink-light: #e8749a;
-  --color-lova-pink-dark: #b83d62;
-  --color-lova-pink-50: #fef1f5;
-  --color-lova-pink-100: #fde4ec;
-  --color-lova-cream: #fdf8f5;
-  --color-lova-bg: #faf9f7;
-  --color-lova-text: #1a1a1a;
-  --color-lova-text-muted: #8a8a8a;
-  --color-lova-card: rgba(255, 255, 255, 0.92);
-  --color-lova-border: #ebe8e5;
-  --color-lova-lavender: #e8e0ff;
-  --color-lova-peach: #ffe8d6;
+  /* Factorial brand palette */
+  --color-radical: #FF355E;
+  --color-radical-dark: #E51943;
+  --color-radical-light: #FF6B8A;
+  --color-radical-50: #FFF0F3;
+  --color-radical-100: #FFD7DF;
+
+  --color-viridian: #07A2AD;
+  --color-viridian-dark: #007C85;
+  --color-viridian-light: #3BBFC8;
+
+  --color-navy: #1A1A31;
+  --color-navy-80: #25253D;
+  --color-navy-60: #515164;
+  --color-navy-40: #7C7C8B;
+  --color-navy-20: #A8A8B1;
+  --color-navy-10: #D3D3D8;
+  --color-navy-5: #E9E9EC;
+  --color-navy-2: #F4F4F5;
+
+  /* Factorial One gradient */
+  --color-fone-gold: #F9D69B;
+  --color-fone-red: #E51943;
+  --color-fone-lavender: #D2D9F9;
 
   /* shadcn mappings */
   --color-sidebar-ring: var(--sidebar-ring);
@@ -65,38 +75,38 @@
 }
 
 :root {
-  --background: #faf9f7;
-  --foreground: #1a1a1a;
-  --card: rgba(255, 255, 255, 0.92);
-  --card-foreground: #1a1a1a;
+  --background: #F4F4F5;
+  --foreground: #1A1A31;
+  --card: rgba(255, 255, 255, 0.95);
+  --card-foreground: #1A1A31;
   --popover: #ffffff;
-  --popover-foreground: #1a1a1a;
-  --primary: #d14d72;
+  --popover-foreground: #1A1A31;
+  --primary: #FF355E;
   --primary-foreground: #ffffff;
-  --secondary: #fdf8f5;
-  --secondary-foreground: #1a1a1a;
-  --muted: #f5f3f0;
-  --muted-foreground: #8a8a8a;
-  --accent: #fdf8f5;
-  --accent-foreground: #1a1a1a;
-  --destructive: #ef4444;
-  --border: #ebe8e5;
-  --input: #ebe8e5;
-  --ring: #d14d72;
-  --chart-1: #d14d72;
-  --chart-2: #e8749a;
-  --chart-3: #e8e0ff;
-  --chart-4: #ffe8d6;
-  --chart-5: #b83d62;
+  --secondary: #F4F4F5;
+  --secondary-foreground: #1A1A31;
+  --muted: #E9E9EC;
+  --muted-foreground: #7C7C8B;
+  --accent: #F4F4F5;
+  --accent-foreground: #1A1A31;
+  --destructive: #E51943;
+  --border: #E9E9EC;
+  --input: #D3D3D8;
+  --ring: #FF355E;
+  --chart-1: #FF355E;
+  --chart-2: #07A2AD;
+  --chart-3: #F9D69B;
+  --chart-4: #D2D9F9;
+  --chart-5: #E51943;
   --radius: 1rem;
-  --sidebar: #fdf8f5;
-  --sidebar-foreground: #1a1a1a;
-  --sidebar-primary: #d14d72;
+  --sidebar: #F4F4F5;
+  --sidebar-foreground: #1A1A31;
+  --sidebar-primary: #FF355E;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #fdf8f5;
-  --sidebar-accent-foreground: #1a1a1a;
-  --sidebar-border: #ebe8e5;
-  --sidebar-ring: #d14d72;
+  --sidebar-accent: #F4F4F5;
+  --sidebar-accent-foreground: #1A1A31;
+  --sidebar-border: #E9E9EC;
+  --sidebar-ring: #FF355E;
 }
 
 @layer base {
@@ -112,11 +122,9 @@
 }
 
 /* ═══════════════════════════════════════
-   PERFORMANCE-OPTIMIZED ANIMATIONS
-   GPU-accelerated with will-change hints
+   ANIMATIONS — GPU-accelerated
    ═══════════════════════════════════════ */
 
-/* Floating orbs - GPU-composited */
 @keyframes float-orb {
   0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
   25% { transform: translate3d(25px, -15px, 0) scale(1.04); }
@@ -142,7 +150,6 @@
   contain: layout style;
 }
 
-/* Staggered entrance for time slots */
 @keyframes slot-enter {
   from { opacity: 0; transform: translate3d(0, 8px, 0) scale(0.95); }
   to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
@@ -154,7 +161,6 @@
   will-change: transform, opacity;
 }
 
-/* Panel slide transitions - GPU composited */
 @keyframes slide-in-right {
   from { opacity: 0; transform: translate3d(20px, 0, 0); }
   to { opacity: 1; transform: translate3d(0, 0, 0); }
@@ -214,35 +220,30 @@
   animation: check-bg-fill 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Date selected state - extracted from inline styles */
+/* Date selected */
 .date-selected {
-  background: linear-gradient(135deg, #d14d72, #e8749a);
-  box-shadow: 0 4px 12px rgba(209, 77, 114, 0.25), 0 1px 3px rgba(209, 77, 114, 0.15);
+  background: linear-gradient(135deg, #FF355E, #FF6B8A);
+  box-shadow: 0 4px 12px rgba(255, 53, 94, 0.25), 0 1px 3px rgba(255, 53, 94, 0.15);
 }
 
-/* Custom scrollbar for time slots */
-.slots-scroll::-webkit-scrollbar {
-  width: 4px;
-}
-.slots-scroll::-webkit-scrollbar-track {
-  background: transparent;
-}
-.slots-scroll::-webkit-scrollbar-thumb {
-  background: rgba(209, 77, 114, 0.15);
-  border-radius: 10px;
-}
-.slots-scroll::-webkit-scrollbar-thumb:hover {
-  background: rgba(209, 77, 114, 0.3);
+/* Custom scrollbar */
+.slots-scroll::-webkit-scrollbar { width: 4px; }
+.slots-scroll::-webkit-scrollbar-track { background: transparent; }
+.slots-scroll::-webkit-scrollbar-thumb { background: rgba(255, 53, 94, 0.12); border-radius: 10px; }
+.slots-scroll::-webkit-scrollbar-thumb:hover { background: rgba(255, 53, 94, 0.25); }
+
+/* Frobel geometric pattern (Factorial-inspired) */
+.frobel-pattern {
+  background-image:
+    radial-gradient(circle at 20% 80%, rgba(255, 53, 94, 0.04) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(7, 162, 173, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(249, 214, 155, 0.03) 0%, transparent 40%);
 }
 
-/* ═══════════════════════════════════════
-   ACCESSIBILITY: Reduced motion
-   ═══════════════════════════════════════ */
+/* Accessibility */
 @media (prefers-reduced-motion: reduce) {
   .animate-float-orb,
-  .animate-float-orb-slow {
-    animation: none;
-  }
+  .animate-float-orb-slow { animation: none; }
 
   .animate-slot-enter,
   .animate-slide-right,
