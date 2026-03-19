@@ -154,6 +154,11 @@ export function BookingWidget({
                 </div>
               )}
 
+              {/* Language switcher */}
+              <div className="mt-4">
+                <LanguageSwitcher />
+              </div>
+
               {/* Selected slot summary (form step) */}
               {step === "form" && selectedDate && selectedTime && (
                 <div className="mt-4 animate-fade-up">
@@ -213,11 +218,15 @@ function WidgetShell({ children }: { children: React.ReactNode }) {
         {children}
       </div>
       <div className="flex items-center gap-3">
+        <img
+          src="https://4960096.fs1.hubspotusercontent-eu1.net/hubfs/4960096/LOGO-RESOLVE-A-IN.gif"
+          alt="Factorial"
+          className="h-6 opacity-50"
+        />
+        <span className="text-navy-10">|</span>
         <p className="text-[11.5px] text-navy-20">
           Powered by <span className="font-medium text-navy-40">Lova</span>
         </p>
-        <span className="text-navy-10">|</span>
-        <LanguageSwitcher />
       </div>
     </div>
   );
