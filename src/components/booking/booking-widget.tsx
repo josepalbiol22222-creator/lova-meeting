@@ -7,6 +7,7 @@ import { TimeSelector } from "./time-selector";
 import { BookingForm } from "./booking-form";
 import { Confirmation } from "./confirmation";
 import { Clock, Video, Globe } from "lucide-react";
+import { FactorialLogo } from "@/components/ui/factorial-logo";
 
 type Step = "select" | "form" | "confirmed";
 
@@ -114,15 +115,25 @@ export function BookingWidget({
                       </span>
                     )}
                   </div>
-                  {/* Online indicator */}
-                  <div className="absolute -bottom-0.5 -right-0.5 h-4 w-4 rounded-full border-[2.5px] border-white bg-emerald-400" />
+                  {/* Factorial badge */}
+                  <div className="absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full border-[2px] border-white bg-white shadow-sm">
+                    <FactorialLogo className="h-3 w-3" color="#FF355E" />
+                  </div>
                 </div>
               </div>
 
-              {/* Name & title */}
-              <p className="text-[13px] font-medium text-lova-text-muted">
-                {organizer.name}
-              </p>
+              {/* Name & company */}
+              <div className="mb-0.5 flex items-center gap-1.5">
+                <p className="text-[13px] font-medium text-lova-text-muted">
+                  {organizer.name}
+                </p>
+                {organizer.company && (
+                  <>
+                    <span className="text-lova-text-muted/30">&middot;</span>
+                    <p className="text-[13px] font-medium text-lova-text-muted/60">{organizer.company}</p>
+                  </>
+                )}
+              </div>
               <h1 className="mt-0.5 font-heading text-[23px] font-extrabold leading-[1.2] tracking-[-0.01em] text-lova-text">
                 {meetingTitle}
               </h1>
